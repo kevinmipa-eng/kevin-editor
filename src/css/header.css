@@ -1,0 +1,120 @@
+header {
+    width: 100%;
+    padding: 28px 8%;
+}
+
+#navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.banner-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.banner-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.banner {
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: auto;
+  aspect-ratio: 1600 / 404;
+  object-fit: cover;
+  object-position: center;
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .banner {
+    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    max-height: 45vh; /* limita altura para não ocupar a tela inteira */
+    object-fit: contain;
+    object-position: top center; /* mantém a parte superior visível */
+    background-color: #000; /* evita bandas brancas em imagens com espaço */
+  }
+}
+
+#nav_logo {
+    width: 68px;
+    height: auto;
+    
+}
+
+#nav_list {
+    display: flex;
+    list-style: none;
+    gap: 48px;
+}
+
+.nav-item a { 
+    text-decoration: none;
+    color: #1d1d1d;
+    font-weight: 750;
+    font-size: 21px;
+}
+
+.nav-item.active a {
+    color: #1d1d1d;
+    border-bottom: 3px solid #117758;
+
+}
+#mobile_btn {
+    display: none;
+}
+
+#mobile_menu {
+    display: none;
+}
+
+@media screen and (max-width: 1170px) {
+    
+    #nav_list, #navbar .btn-default {
+        display: none;
+    }
+
+    #mobile_btn {
+        display: block;
+        border: none;
+        background-color: transparent;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    #mobile_menu.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    
+    #mobile_nav_list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 12px 0;
+    }
+
+    #mobile_nav_list .nav-item {
+        list-style: none;
+        text-align: center;
+    }
+
+}
+
