@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Edição de Vídeo</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- BARRA DE NAVEGAÇÃO -->
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-link active" data-tab="portfolio-tab">Portfólio</button>
@@ -19,22 +21,46 @@
 
     <div class="main-container">
 
-        <header class="banner-wrapper">
-            <div class="decor star">★</div>
-            <div class="decor arrow">▲</div>
-            <div class="decor cam-icon">📹</div>
-            <h1>Edição de Vídeo Completa <br> para o <span>seu Negócio</span></h1>
-            <p>Do conteúdo educativo que engaja aos vídeos curtos que convertem.</p>
+        <!-- CAPA DO PORTFÓLIO -->
+        <header class="cover-hero-flex">
+            <div class="hero-text-block">
+                <h1><span class="line-one">Edição de Vídeo Completa</span> <br>para o <span class="text-yellow">seu Negócio</span></h1>
+                <p>Do conteúdo educativo que engaja aos vídeos curtos que convertem.</p>
+            </div>
+            <div class="hero-img-block">
+                <img src="src/images/banner.webp" alt="Banner Edição de Vídeo" class="cover-img-flex">
+            </div>
         </header>
 
-        <!-- ================= ABA 1: PORTFÓLIO (AGORA ABRE PRIMEIRO) ================= -->
+        <!-- ================= ABA 1: PORTFÓLIO ================= -->
         <div id="portfolio-tab" class="tab-content active">
             <section class="section-box">
                 <h2>Meu Portfólio</h2>
-                <p>Confira abaixo alguns dos meus trabalhos finais destacados em vídeo. Projetos editados com foco em alta retenção, ritmo dinâmico e identidade visual marcante.</p>
                 
-                <!-- SEÇÃO ANTES E DEPOIS -->
-                <h3 class="section-subtitle">Comparativo: Antes vs Depois</h3>
+                <!-- 1. SHOWREEL NO TOPO -->
+                <h3 class="section-subtitle">🎬 Aprenda um pouco do meu processo de edição</h3>
+                <p style="font-size: 0.95rem; color: #9da0a0; margin-bottom: 15px;">Neste vídeo compartilho algumas das técnicas que utilizo no dia a dia para criar edições mais dinâmicas e envolventes. É uma forma de conhecer minha metodologia de trabalho e meu domínio das ferramentas de edição.</p>
+                <div class="video-grid single-video">
+                    <div class="video-card headline-video">
+                        <div class="video-native-wrapper">
+                            <!-- Vídeo local rodando automático e no mudo -->
+                            <video id="showreel-video" src="src/videos/Showreel.webm" autoplay loop muted playsinline></video>
+                            
+                            <!-- Botões flutuantes no canto do vídeo -->
+                            <div class="video-controls-overlay">
+                                <button id="mute-toggle-btn" class="overlay-btn" title="Desmutar/Mutar">
+                                    <i class="fa-solid fa-volume-xmark"></i>
+                                </button>
+                                <a href="https://youtu.be/E-ZaeTfrlGY" target="_blank" class="overlay-btn" title="Assistir Completo">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="btn-text">Ver Completo</span>
+                                </a>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+                <!-- 2. COMPARATIVO ANTES VS DEPOIS -->
+                <h3 class="section-subtitle">🎥 Comparativo: Antes vs Depois</h3>
                 <div class="comparison-container">
                     <div class="video-box">
                         <span class="video-label antes">Antes</span>
@@ -46,21 +72,55 @@
                     </div>
                 </div>
 
-                <!-- CONTAINER DE VÍDEOS -->
-                <h3 class="section-subtitle">Trabalhos em Destaque</h3>
-                <div class="video-grid">
-                    <div class="video-card">
-                        <div class="video-placeholder">Vídeo Exemplo 1<br>(Insira seu iframe/vídeo aqui)</div>
-                        <h4>Edição Dinâmica - YouTube</h4>
-                    </div>
-                    <div class="video-card">
-                        <div class="video-placeholder">Vídeo Exemplo 2<br>(Insira seu iframe/vídeo aqui)</div>
-                        <h4>Corte de Marketing - Reels</h4>
-                    </div>
+                <!-- 3. CARROSSEL DOS CANAIS -->
+                <h3 class="section-subtitle">📺 Canais que já editei:</h3>
+                <div class="carousel-wrapper">
+                    <!-- Container que se move -->
+                    <div class="channels-carousel-container">
+                        
+                        <!-- SLIDE 1: MITADA PLAY -->
+                        <div class="carousel-channel-item slide active">
+                            <a href="https://www.youtube.com/@mitadaplay" target="_blank" rel="noopener noreferrer">
+                            <img src="src/images/Canais_mitadaPlay.png" alt="Canal Mitada Play" class="carousel-brand-img">
+                            </a>
+                        </div>
+
+                        <!-- SLIDE 2: KEVIN MSPLAY -->
+                        <div class="carousel-channel-item slide">
+                            <a href="https://www.youtube.com/@kevinmsplay" target="_blank" rel="noopener noreferrer">
+                            <img src="src/images/Canais_MSplay.png" alt="Canal Kevin MSplay" class="carousel-brand-img">
+                            </a>
+                        </div>
+
+                        <!-- SLIDE 3: QUÍMICA INTRIGANTE -->
+                        <div class="carousel-channel-item slide">
+                            <a href="https://www.youtube.com/@quimicaintrigante3193" target="_blank" rel="noopener noreferrer">
+                            <img src="src\images\Canais_Qúimica.png" alt="Canal Química Intrigante" class="carousel-brand-img">
+                            </a>
+                        </div>
+
+                        <!-- SLIDE 4: VALE CONCURSOS -->
+                        <div class="carousel-channel-item slide">
+                            <a href="https://www.youtube.com/@valeconcursos" target="_blank" rel="noopener noreferrer">
+                            <img src="src/images/Canais_Vale.png" alt="Canal Vale Concursos" class="carousel-brand-img">
+                            </a>
+                        </div>
+
+                    </div> <!-- FIM DO CONTAINER MOVEDOR -->
+
+                    <!-- Controles de Navegação -->
+                    <button class="carousel-btn prev-btn" aria-label="Slide anterior">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn" aria-label="Próximo slide">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
+                
             </section>
         </div>
 
+        <!-- ================= ABA 2: SOBRE MIM ================= -->
         <div id="sobre-mim-tab" class="tab-content">
             <section class="section-box profile-section">
                 <div class="profile-container">
@@ -68,55 +128,22 @@
                 </div>
                 <div class="profile-text">
                     <h2>Sobre Mim</h2>
-                    <p>Olá! Sou editor de vídeo com 2 anos de experiência, especializado em criar conteúdos que engajam, ensinam e convertem. Minha bagagem inclui a edição de videoaulas didáticas para cursinhos preparatórios e infoprodutos na Hotmart, onde prezo pela clareza e retenção do aluno. Também possuo forte atuação no YouTube, desenvolvendo narrativas dinâmicas com foco em audiência, e na criação de vídeos curtos (Reels e Shorts) estruturados para estratégias de marketing e conversão rápida. Seja para educar, entreter ou vender, entrego uma edição profissional que valoriza a sua mensagem e conecta com o público certo.</p>
+                    <p>Olá! Sou editor de vídeo especializado em criar conteúdos que engajam, ensinam e convertem. Minha bagagem inclui a edição de videoaulas didáticas para cursinhos preparatórios e infoprodutos na Hotmart, além de projetos autorais e canais de nicho focados em alta retenção.</p>
                 </div>
             </section>
 
             <section class="section-box">
                 <h2>Experiência Profissional</h2>
                 <h3>Editor de Vídeo | Vale Concursos (2 anos)</h3>
-                <p>Atuei na pós-produção audiovisual voltada para a preparação de concursos públicos, transformando gravações brutas de aulas densas em conteúdos dinâmicos e didáticos.</p>
+                <p>Atuei na pós-produção audiovisual voltada para a preparação de concursos públicos, transformando gravações brutas em conteúdos didáticos e dinâmicos.</p>
                 <ul class="experience-list">
-                    <li><strong>Infoprodutos e Área de Membros (Hotmart):</strong> Edição estruturada de módulos de videoaulas, focando em cortes cirúrgicos, eliminação de ruídos e inserção de recursos visuais para auxiliar na retenção e aprendizado do aluno.</li>
-                    <li><strong>Canais de Tração (YouTube):</strong> Edição de conteúdos estratégicos como aulões e dicas rápidas, aplicando técnicas de ganchos iniciais fortes e ritmo dinâmico para prender a atenção do espectador na plataforma.</li>
+                    <li><strong>Infoprodutos (Hotmart):</strong> Edição estruturada de módulos de videoaulas.</li>
+                    <li><strong>Canais de Tração (YouTube):</strong> Edição de conteúdos estratégicos como aulões e dicas rápidas.</li>
                 </ul>
-            </section>
-
-            <section class="section-box">
-                <h2>Canais que já Editei</h2>
-                
-                <div class="carousel-container">
-                    <div class="carousel-slides">
-                        <div class="slide active"><img src="src/images/Canais_Vale.png" alt="Vale Concursos"></div>
-                        <div class="slide"><img src="src/images/Canais_Qúimica.png" alt="Química Intrante"></div>
-                        <div class="slide"><img src="src/images/Canais_mitadaPlay.png" alt="Mitada Play"></div>
-                        <div class="slide"><img src="src/images/Canais_MSplay.png" alt="Kevin MSPlay"></div>
-                    </div>
-                    <button class="carousel-btn prev-btn">❮</button>
-                    <button class="carousel-btn next-btn">❯</button>
-                </div>
-
-                <div class="carousel-captions">
-                    <div class="caption active">
-                        <h4>Vale Concursos | Edição de Videoaulas e Infoprodutos</h4>
-                        <p>Pós-produção técnica e estruturada para cursinho preparatório de concursos públicos. Foco total na clareza do conteúdo didático, eliminação de ruídos, além de suporte na criação de conteúdos dinâmicos para YouTube e Hotmart.</p>
-                    </div>
-                    <div class="caption">
-                        <h4>Canal Química Intrante | Edição Educativa e Narrativa</h4>
-                        <p>Produção voltada para a divulgação científica e neuroquímica, transformando roteiros complexos sobre reações e processos de laboratório em vídeos altamente visuais. Aplicação de ritmo didático e recursos que facilitam a compreensão do espectador.</p>
-                    </div>
-                    <div class="caption">
-                        <h4>Canal Mitada Play | Edição com Foco em Retenção e Dinamismo</h4>
-                        <p>Pós-produção voltada para o público jovem e de entretenimento, aplicando cortes rápidos, sound design strategic, efeitos visuais e um ritmo acelerado para garantir altos níveis de retenção e engajamento.</p>
-                    </div>
-                    <div class="caption">
-                        <h4>Canal Kevin MSPlay | Conteúdo Dinâmico e Gamificado</h4>
-                        <p>Desenvolvimento e edição de conteúdo focado em engajamento de audiência, unindo uma narrativa ágil a elementos gráficos, ganchos iniciais fortes e estratégias audiovisuais que mantêm o espectador entretido do início ao fim.</p>
-                    </div>
-                </div>
             </section>
         </div>
 
+        <!-- ================= ABA 3: SABER MAIS ================= -->
         <div id="saber-mais-tab" class="tab-content">
             <section class="section-box know-more-section">
                 <h2>Saber Mais</h2>
@@ -125,16 +152,29 @@
                 <div class="channel-callout">
                     <h3>Meu Canal sobre Edição de Vídeo</h3>
                     <p>Acompanhe tutoriais, dicas de workflow, técnicas de retenção e bastidores da pós-produção diretamente no meu canal oficial.</p>
-                    <a href="#" target="_blank" class="youtube-btn">Acessar meu Canal no YouTube 🎥</a>
+                    <a href="https://youtu.be/E-ZaeTfrlGY" target="_blank" class="youtube-btn">Acessar meu Canal no YouTube 🎥</a>
                 </div>
             </section>
         </div>
 
+        <!-- RODAPÉ -->
         <footer id="footer-contact" class="main-footer">
-            <p>Gostou do meu trabalho? Vamos criar algo incrível juntos!</p>
-            <a href="https://www.instagram.com/kevin_br1" target="_blank" class="instagram-link">
-                📸 Me acompanhe no Instagram: <strong>@kevin_br1</strong>
-            </a>
+
+            <!-- Ícones de fundo espalhados -->
+            <i class="fa-solid fa-film bg-icon icon-1"></i>
+            <i class="fa-solid fa-video bg-icon icon-2"></i>
+            <i class="fa-solid fa-clapperboard bg-icon icon-3"></i>
+            <i class="fa-solid fa-scissors bg-icon icon-4"></i>
+            <i class="fa-solid fa-bolt bg-icon icon-5"></i>
+            
+            <!-- Conteúdo principal do Rodapé -->
+            <div class="footer-content">
+                <p>Gostou do meu trabalho? Vamos criar algo incrível juntos!</p>
+                <a href="https://www.instagram.com/kevin_br1" target="_blank" class="instagram-link">
+                    📸 Me acompanhe no Instagram: <strong>@kevin_br1</strong>
+                </a>
+            </div>
+
         </footer>
 
     </div>

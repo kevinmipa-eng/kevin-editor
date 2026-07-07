@@ -1,3 +1,6 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E RESET
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,7 +11,7 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: #121f20; 
     color: #f5f5f5;
-    padding: 80px 10px 20px 10px; /* Adicionado padding superior por causa da Navbar fixa */
+    padding: 80px 10px 20px 10px;
     display: flex;
     justify-content: center;
 }
@@ -18,7 +21,9 @@ body {
     max-width: 900px;
 }
 
-/* BARRA DE NAVEGAÇÃO */
+/* ==========================================================================
+   BARRA DE NAVEGAÇÃO (FIXA)
+   ========================================================================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -61,12 +66,15 @@ body {
     border: 1px solid #d19a2c;
     color: #d19a2c;
 }
+
 .nav-link.contact-btn:hover {
     background-color: #d19a2c;
     color: #172d30;
 }
 
-/* ABAS - LOGICA VISUAL */
+/* ==========================================================================
+   CONTROLE DE EXIBIÇÃO DAS ABAS (TABS)
+   ========================================================================== */
 .tab-content {
     display: none;
 }
@@ -76,45 +84,69 @@ body {
     animation: fadeIn 0.4s ease-in-out;
 }
 
-/* BANNER PRINCIPAL */
-.banner-wrapper {
-    background-color: #234346;
-    background-image: radial-gradient(circle, #30585c 0%, #172d30 100%);
-    padding: 50px 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+/* ==========================================================================
+   CAPA HERO FLEX
+   ========================================================================== */
+.cover-hero-flex {
+    width: 100%;
+    background-color: #1a2f31;
     margin-bottom: 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid #234346;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
-.decor {
-    position: absolute;
-    opacity: 0.15;
-    pointer-events: none;
+.hero-text-block {
+    width: 55%;
+    padding: 40px;
+    z-index: 2;
+    position: relative;
 }
-.star { bottom: -10px; left: 20px; font-size: 70px; color: #d19a2c; transform: rotate(-15deg); }
-.arrow { bottom: 30px; right: 10%; font-size: 50px; color: #d19a2c; transform: rotate(45deg); }
-.cam-icon { top: 20px; left: 5%; font-size: 40px; color: #9da0a0; transform: rotate(-10deg); }
 
-.banner-wrapper h1 {
-    font-size: 2.6rem;
+.hero-img-block {
+    width: 45%;
+    align-self: stretch;
+    display: flex;
+}
+
+.cover-img-flex {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-text-block h1 {
+    font-size: 2.1rem;
     color: #ffffff;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-}
-.banner-wrapper h1 span { color: #d19a2c; }
-.banner-wrapper p {
-    font-size: 1.25rem;
-    color: #9da0a0;
-    max-width: 650px;
-    margin: 0 auto;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    line-height: 1.2;
 }
 
-/* CAIXAS DE CONTEÚDO */
+.line-one {
+    white-space: nowrap;
+    color: #ffffff;
+}
+
+.text-yellow {
+    color: #d19a2c;
+}
+
+.hero-text-block p {
+    font-size: 1.1rem;
+    color: #9da0a0;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ==========================================================================
+   CAIXAS DE CONTEÚDO PADRÃO
+   ========================================================================== */
 .section-box {
     background-color: #1a2f31;
     padding: 30px;
@@ -123,13 +155,46 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
+h2 {
+    color: #d19a2c;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #234346;
+    padding-bottom: 8px;
+}
+
+h3 { 
+    color: #ffffff; 
+    font-size: 1.3rem; 
+    margin: 15px 0 5px 0; 
+}
+
+p { 
+    font-size: 1.1rem; 
+    line-height: 1.6; 
+    color: #e0e0e0; 
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 25px 0 15px 0;
+    border-left: 3px solid #d19a2c;
+    padding-left: 10px;
+}
+
+/* ==========================================================================
+   SOBRE MIM
+   ========================================================================== */
 .profile-section {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-.profile-container { flex-shrink: 0; }
+.profile-container { 
+    flex-shrink: 0; 
+}
 
 .profile-pic {
     width: 180px;
@@ -140,161 +205,24 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.profile-text { flex-grow: 1; }
-
-h2 {
-    color: #d19a2c;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #234346;
-    padding-bottom: 8px;
+.profile-text { 
+    flex-grow: 1; 
 }
 
-h3 { color: #ffffff; font-size: 1.3rem; margin: 15px 0 5px 0; }
-p { font-size: 1.1rem; line-height: 1.6; color: #e0e0e0; }
-
-.experience-list { margin-top: 15px; padding-left: 20px; color: #e0e0e0; }
-.experience-list li { margin-bottom: 10px; line-height: 1.5; }
-
-/* SEÇÃO PORTFÓLIO E VÍDEOS */
-.video-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 25px;
+.experience-list { 
+    margin-top: 15px; 
+    padding-left: 20px; 
+    color: #e0e0e0; 
 }
 
-.video-card {
-    background-color: #121f20;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    border: 1px solid #234346;
+.experience-list li { 
+    margin-bottom: 10px; 
+    line-height: 1.5; 
 }
 
-.video-placeholder {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background-color: #172d30;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #9da0a0;
-    border-radius: 4px;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-}
-
-.video-card h4 { color: #ffffff; font-size: 1.1rem; }
-
-/* SEÇÃO SABER MAIS */
-.channel-callout {
-    margin-top: 20px;
-    background: #234346;
-    padding: 25px;
-    border-radius: 8px;
-    text-align: center;
-    border-left: 5px solid #d19a2c;
-}
-
-.channel-callout h3 { margin-top: 0; }
-.channel-callout p { margin-bottom: 20px; color: #9da0a0; }
-
-.youtube-btn {
-    display: inline-block;
-    background-color: #e63946;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.youtube-btn:hover { background-color: #b71c1c; transform: scale(1.05); }
-
-/* CARROSSEL E LEGENDAS */
-.carousel-container {
-    position: relative;
-    max-width: 320px;
-    margin: 30px auto 15px auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    background: #121f20;
-}
-
-.carousel-slides { display: flex; width: 100%; }
-.slide { display: none; width: 100%; flex-shrink: 0; }
-.slide.active { display: block; }
-.slide img { width: 100%; display: block; object-fit: cover; }
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(23, 45, 48, 0.9);
-    color: #d19a2c;
-    border: none;
-    font-size: 24px;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-}
-.carousel-btn:hover { background: #d19a2c; color: #172d30; }
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
-
-.carousel-captions { text-align: center; max-width: 600px; margin: 20px auto 0 auto; min-height: 120px; }
-.caption { display: none; }
-.caption.active { display: block; animation: fadeIn 0.5s ease-in-out; }
-.caption h4 { color: #ffffff; font-size: 1.2rem; margin-bottom: 8px; }
-.caption p { font-size: 1rem; color: #9da0a0; }
-
-/* RODAPÉ DO INSTAGRAM */
-.main-footer {
-    text-align: center;
-    padding: 40px 20px;
-    border-top: 2px solid #234346;
-    margin-top: 40px;
-}
-.main-footer p { margin-bottom: 12px; color: #9da0a0; }
-
-.instagram-link {
-    display: inline-block;
-    color: #d19a2c;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-.instagram-link:hover { color: #ffffff; transform: translateY(-2px); }
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-    .video-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-    .banner-wrapper { display: none !important; }
-    body { padding-top: 70px; }
-    .nav-link { padding: 6px 10px; font-size: 0.95rem; }
-    .profile-section { flex-direction: column; text-align: center; gap: 15px; }
-    .section-box { padding: 20px; }
-    h2 { font-size: 1.5rem; }
-}
-
-/* COMPARAÇÃO ANTES E DEPOIS */
-.section-subtitle {
-    font-size: 1.2rem;
-    color: #ffffff;
-    margin: 25px 0 15px 0;
-}
-
+/* ==========================================================================
+   COMPARATIVO ANTES E DEPOIS (.WEBM)
+   ========================================================================== */
 .comparison-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -328,23 +256,333 @@ p { font-size: 1.1rem; line-height: 1.6; color: #e0e0e0; }
     text-transform: uppercase;
     border-radius: 4px;
     z-index: 5;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.video-label.antes {
-    background-color: #e63946; /* Vermelho para o Antes */
-    color: #ffffff;
+.video-label.antes { background-color: #e63946; color: #ffffff; }
+.video-label.depois { background-color: #2a9d8f; color: #ffffff; }
+
+/* ==========================================================================
+   GRID DE VÍDEOS (YOUTUBE IFRAMES)
+   ========================================================================== */
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.video-label.depois {
-    background-color: #2a9d8f; /* Verde para o Depois */
-    color: #ffffff;
+.single-video {
+    grid-template-columns: 1fr;
 }
 
-/* Responsividade para telas menores */
+.video-card {
+    background-color: #121f20;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #234346;
+}
+
+.video-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.video-iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-card h4 { 
+    color: #ffffff; 
+    font-size: 1.05rem; 
+}
+
+/* ==========================================================================
+   SABER MAIS
+   ========================================================================== */
+.channel-callout {
+    margin-top: 20px;
+    background: #234346;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    border-left: 5px solid #d19a2c;
+}
+
+.channel-callout h3 { margin-top: 0; }
+.channel-callout p { margin-bottom: 20px; color: #9da0a0; }
+
+.youtube-btn {
+    display: inline-block;
+    background-color: #e63946;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.youtube-btn:hover { background-color: #b71c1c; transform: scale(1.05); }
+
+/* ==========================================================================
+   RODAPÉ REESTRUTURADO (COM ÍCONES EM PARALLAX/FUNDO)
+   ========================================================================== */
+.main-footer {
+    position: relative; /* Necessário para ancorar os ícones absolutos */
+    overflow: hidden;   /* Impede que os ícones criem barras de rolagem na tela */
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 2px solid #234346;
+    margin-top: 40px;
+    background-color: #172d30; /* Dá uma leve profundidade ao fundo do rodapé */
+    border-radius: 12px 12px 0 0;
+}
+
+/* Garante que o texto e os links fiquem sempre à frente dos ícones */
+.footer-content {
+    position: relative;
+    z-index: 10;
+}
+
+.main-footer p { 
+    margin-bottom: 12px; 
+    color: #9da0a0; 
+}
+
+.instagram-link { 
+    display: inline-block; 
+    color: #d19a2c; 
+    text-decoration: none; 
+    font-size: 1.2rem; 
+    transition: 0.3s; 
+}
+
+.instagram-link:hover { 
+    color: #ffffff; 
+    transform: translateY(-2px); 
+}
+
+/* Estilo geral de todos os ícones de fundo */
+.bg-icon {
+    position: absolute;
+    color: #234346; /* Cor bem próxima ao fundo para ser sutil */
+    opacity: 0.25;  /* Opacidade baixa para não roubar a atenção */
+    z-index: 1;     /* Fica atrás do texto */
+    pointer-events: none; /* O utilizador pode clicar "através" do ícone */
+    transition: transform 0.5s ease;
+}
+
+/* Leve animação quando passas o rato no footer inteiro */
+.main-footer:hover .bg-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Posicionamento individual de cada ícone (Espalhados) */
+.icon-1 { top: 15%; left: 8%; font-size: 3rem; transform: rotate(-15deg); }
+.icon-2 { bottom: 20%; left: 22%; font-size: 2.5rem; transform: rotate(20deg); }
+.icon-3 { top: 25%; right: 10%; font-size: 3.5rem; transform: rotate(12deg); }
+.icon-4 { bottom: 15%; right: 25%; font-size: 2.2rem; transform: rotate(-25deg); }
+.icon-5 { top: 50%; left: 48%; font-size: 1.8rem; transform: rotate(5deg); opacity: 0.15; }
+
+/* Esconde ou diminui os ícones em telas pequenas para não poluir o mobile */
 @media (max-width: 600px) {
-    .comparison-container {
-        grid-template-columns: 1fr; /* No celular, eles ficam um embaixo do outro para melhor visualização */
-        gap: 10px;
+    .bg-icon { opacity: 0.12; }
+    .icon-1 { font-size: 2rem; }
+    .icon-3 { font-size: 2.2rem; }
+    .icon-2, .icon-5 { display: none; } /* Esconde alguns para poupar espaço */
+}
+/* ==========================================================================
+   RESPONSIVIDADE Mobile
+   ========================================================================== */
+@media (max-width: 768px) {
+    .video-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    body { padding-top: 70px; }
+    .cover-hero-flex { flex-direction: column; }
+    .hero-text-block, .hero-img-block { width: 100%; }
+    .hero-text-block { padding: 25px; text-align: center; }
+    .hero-text-block h1 { font-size: 1.8rem; }
+    .line-one { white-space: normal; }
+    .nav-link { padding: 6px 10px; font-size: 0.95rem; }
+    .profile-section { flex-direction: column; text-align: center; }
+    .comparison-container { grid-template-columns: 1fr; }
+    .section-box { padding: 20px; }
+}
+
+/* ==========================================================================
+   CONTROLES CUSTOMIZADOS PARA O VÍDEO NATIVO (SHOWREEL)
+   ========================================================================== */
+.video-native-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.video-native-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Contentor dos botões no canto superior direito */
+.video-controls-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+}
+
+/* Estilo dos botões minimalistas */
+.overlay-btn {
+    background: rgba(23, 45, 48, 0.85); /* Fundo escuro transparente */
+    border: 1px solid rgba(209, 154, 44, 0.4);
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px); /* Efeito de vidro fosco */
+}
+
+.overlay-btn:hover {
+    background: #d19a2c;
+    color: #172d30;
+    border-color: #d19a2c;
+    transform: translateY(-1px);
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 480px) {
+    .overlay-btn .btn-text {
+        display: none; /* Esconde o texto no mobile para deixar apenas o ícone */
     }
+    .overlay-btn {
+        padding: 8px;
+    }
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DO CARROSSEL CORRIGIDO (PROPORÇÃO 1:1 - 1080x1080px)
+   ========================================================================== */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 280px; /* Tamanho ideal para um logo quadrado não ficar gigante na tela */
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #121f20;
+    padding: 20px;
+    border: 1px solid #234346;
+}
+
+.channels-carousel-container {
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1; /* Força o container a ser sempre um quadrado perfeito */
+}
+
+/* Oculta os slides por padrão e trata a transição */
+.carousel-channel-item.slide {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s;
+    width: 100%;
+    text-align: center;
+}
+
+/* Exibe apenas o slide ativo */
+.carousel-channel-item.slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+/* Garante que a imagem preencha o espaço quadrado corretamente sem distorcer */
+.carousel-brand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Preserva o logo inteiro dentro do quadrado */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.carousel-brand-img:hover {
+    transform: scale(1.05);
+}
+
+/* Legendas discretas abaixo dos logos */
+.caption {
+    display: none;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #9da0a0;
+    font-weight: 500;
+}
+
+.caption.active {
+    display: block;
+}
+
+/* Botões laterais de navegação ajustados para o formato quadrado */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(23, 45, 48, 0.9);
+    border: 1px solid rgba(209, 154, 44, 0.4);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: #d19a2c;
+    color: #172d30;
+    border-color: #d19a2c;
+}
+
+/* Afastados levemente para fora da imagem para não cobrir o logo */
+.prev-btn { left: -10px; }
+.next-btn { right: -10px; }
+
+/* Esconde as setas no mobile para não poluir, já que o autoplay resolve */
+@media (max-width: 480px) {
+    .carousel-btn { display: none; }
+    .carousel-wrapper { max-width: 220px; } /* Um pouco menor no celular */
 }
