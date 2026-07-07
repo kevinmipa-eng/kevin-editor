@@ -19,7 +19,7 @@ window.addEventListener("load", function() {
     }
 
     // ==========================================================================
-    // 2. LÓGICA DAS ABAS (TABS)
+    // 2. LÓGICA DAS ABAS (TABS) com Rolagem Automática
     // ==========================================================================
     const navLinks = document.querySelectorAll(".nav-link[data-tab]");
     const tabContents = document.querySelectorAll(".tab-content");
@@ -40,6 +40,19 @@ window.addEventListener("load", function() {
                     content.classList.remove("active");
                 }
             });
+
+            // ROLA A PÁGINA PARA BAIXO PULANDO O BANNER
+            // Seleciona a primeira caixa de conteúdo dentro da aba que acabou de ficar ativa
+            const activeTab = document.getElementById(targetTab);
+            const firstSection = activeTab.querySelector(".section-box");
+
+            if (firstSection) {
+                // Executa a rolagem suave até o início do conteúdo da aba
+                firstSection.scrollIntoView({ 
+                    behavior: "smooth", 
+                    block: "start" 
+                });
+            }
         });
     });
 

@@ -586,3 +586,30 @@ p {
     .carousel-btn { display: none; }
     .carousel-wrapper { max-width: 220px; } /* Um pouco menor no celular */
 }
+
+/* ==========================
+   BOTÃO DE CONTATO POR EMAIL
+   ========================== */
+
+.email-btn {
+    display: inline-block;
+    background-color: #d19a2c;
+    color: #121f20;          /* Cor do texto */
+    text-decoration: none;   /* Remove o sublinhado */
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.email-btn:hover {
+    background-color: #e6b84d;
+    color: #121f20;          /* Mantém a mesma cor no hover */
+}
+
+.email-btn:visited,
+.email-btn:link,
+.email-btn:active {
+    color: #121f20;          /* Impede que fique azul ou roxo */
+    text-decoration: none;
+}
