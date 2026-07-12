@@ -613,3 +613,177 @@ p {
     color: #121f20;          /* Impede que fique azul ou roxo */
     text-decoration: none;
 }
+
+/* ==========================================================================
+   NOVOS CONTROLES ESTILO YOUTUBE PARA O SHOWREEL
+   ========================================================================== */
+.video-native-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Painel de Controles Principal */
+.custom-video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4), transparent);
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 30;
+    opacity: 0; /* Invisível por padrão, aparece ao passar o mouse */
+    transition: opacity 0.3s ease;
+    box-sizing: border-box;
+}
+
+.video-native-wrapper:hover .custom-video-controls,
+.video-native-wrapper:focus-within .custom-video-controls {
+    opacity: 1;
+}
+
+/* Barra de Progresso estilo YouTube */
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    position: relative;
+    border-radius: 2px;
+    transition: height 0.1s ease;
+}
+
+.progress-container:hover {
+    height: 7px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #d19a2c; /* Amarelo dourado da sua paleta */
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Indicador redondo na ponta da barra ao passar o mouse */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 12px;
+    height: 12px;
+    background: #d19a2c;
+    border-radius: 50%;
+    transition: transform 0.1s ease;
+}
+
+.progress-container:hover .progress-bar::after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Alinhamento dos botões abaixo da barra */
+.controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.controls-left, .controls-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.control-icon-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.control-icon-btn:hover {
+    color: #d19a2c;
+}
+
+.control-icon-btn:active {
+    transform: scale(0.9);
+}
+
+.video-time-display {
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    font-family: monospace;
+    user-select: none;
+}
+
+/* Zonas de clique para o celular (Esquerda e Direita) */
+.touch-rewind-zone, .touch-forward-zone {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    height: calc(100% - 45px); /* Não cobre a barra de baixo */
+    z-index: 25;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+    
+    /* ADICIONE ESTA LINHA: Permite que eventos simples de clique 'passem' para o vídeo */
+    pointer-events: none; 
+}
+.touch-rewind-zone { left: 0; }
+.touch-forward-zone { right: 0; }
+
+/* Animações e Feedbacks Visuais de Pulo (Double Tap) */
+.skip-feedback {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 1.2rem;
+    width: 60px;
+    height: 60px;
+    z-index: 28;
+    pointer-events: none;
+    opacity: 0;
+    box-sizing: border-box;
+}
+.skip-feedback span {
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+.skip-feedback.left { left: 15%; }
+.skip-feedback.right { right: 15%; }
+
+@keyframes flashFeedback {
+    0% { opacity: 0; transform: translateY(-50%) scale(0.7); }
+    30% { opacity: 1; transform: translateY(-50%) scale(1); }
+    70% { opacity: 1; transform: translateY(-50%) scale(1); }
+    100% { opacity: 0; transform: translateY(-50%) scale(0.7); }
+}
+.skip-feedback.animate {
+    animation: flashFeedback 0.6s ease forward;
+}
+
+/* Força os controles nativos do celular a sumirem completamente */
+video::-webkit-media-controls { display:none !important; }
+video::-webkit-media-controls-enclosure { display:none !important; }

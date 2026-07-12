@@ -43,19 +43,49 @@
                 <div class="video-grid single-video">
                     <div class="video-card headline-video">
                         <div class="video-native-wrapper">
-                            <!-- Vídeo local rodando automático e no mudo -->
-                            <video id="showreel-video" src="src/videos/Showreel.webm" autoplay loop muted playsinline></video>
+                            <!-- Vídeo local (removido o loop para que os controles façam sentido no final, mantido autoplay/muted) -->
+                            <video id="showreel-video" src="src/videos/Showreel.webm" autoplay muted playsinline></video>
                             
-                            <!-- Botões flutuantes no canto do vídeo -->
-                            <div class="video-controls-overlay">
-                                <button id="mute-toggle-btn" class="overlay-btn" title="Desmutar/Mutar">
-                                    <i class="fa-solid fa-volume-xmark"></i>
-                                </button>
-                                <a href="https://youtu.be/E-ZaeTfrlGY" target="_blank" class="overlay-btn" title="Assistir Completo">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="btn-text">Ver Completo</span>
-                                </a>
+                            <!-- Áreas invisíveis nas laterais para duplo clique no celular -->
+                            <div class="touch-rewind-zone" id="touch-rewind"></div>
+                            <div class="touch-forward-zone" id="touch-forward"></div>
+
+                            <!-- Feedbacks visuais de pulo de tempo (efeito YouTube) -->
+                            <div class="skip-feedback left" id="feedback-left"><i class="fa-solid fa-backward"></i><span>-10s</span></div>
+                            <div class="skip-feedback right" id="feedback-right"><i class="fa-solid fa-forward"></i><span>+10s</span></div>
+
+                            <!-- PAINEL DE CONTROLES COMPLETO (ESTILO YOUTUBE) -->
+                            <div class="custom-video-controls">
+                                <!-- Linha da Barra de Progresso -->
+                                <div class="progress-container" id="progress-container">
+                                    <div class="progress-bar" id="progress-bar"></div>
+                                </div>
+
+                                <!-- Linha dos Botões Inferiores -->
+                                <div class="controls-row">
+                                    <div class="controls-left">
+                                        <button id="play-pause-btn" class="control-icon-btn" title="Play/Pause">
+                                            <i class="fa-solid fa-pause"></i>
+                                        </button>
+                                        <button id="rewind-10s-btn" class="control-icon-btn" title="Voltar 10s">
+                                            <i class="fa-solid fa-backward"></i>
+                                        </button>
+                                        <button id="forward-10s-btn" class="control-icon-btn" title="Avançar 10s">
+                                            <i class="fa-solid fa-forward"></i>
+                                        </button>
+                                        <button id="mute-toggle-btn" class="control-icon-btn" title="Mutar/Desmutar">
+                                            <i class="fa-solid fa-volume-xmark"></i>
+                                        </button>
+                                        <span class="video-time-display" id="video-time">0:00 / 0:00</span>
+                                    </div>
+                                    <div class="controls-right">
+                                        <a href="https://youtu.be/E-ZaeTfrlGY" target="_blank" class="overlay-btn" title="Assistir Completo">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="btn-text">Ver Completo</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>                        
+                        </div>         
                     </div>
                 </div>
 
