@@ -39,14 +39,18 @@
                 
                 <!-- 1. SHOWREEL NO TOPO -->
                 <h3 class="section-subtitle">🎬 Aprenda um pouco do meu processo de edição</h3>
-                <p style="font-size: 0.95rem; color: #9da0a0; margin-bottom: 15px;">Neste vídeo compartilho algumas das técnicas que utilizo no dia a dia para criar edições mais dinâmicas e envolventes. É uma forma de conhecer minha metodologia de trabalho e meu domínio das ferramentas de edição.</p>
+                <p style="font-size: 0.95rem; color: #9da0a0; margin-bottom: 15px;">Neste vídeo compartilho algumas das técnicas que utilizo no dia a dia para criar edições mais dinâmicas e envolventes.</p>
                 <div class="video-grid single-video">
                     <div class="video-card headline-video">
-                        <!-- Wrapper responsivo para o Iframe do YouTube -->
-                        <div class="video-iframe-wrapper">
-                            <!-- Link atualizado com &autoplay=1&mute=1 -->
-                            <iframe src="https://www.youtube.com/embed/E-ZaeTfrlGY?si=_auOk2BIhZ7xB-bp&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>                        
+                        <!-- Container preparado para o Plyr (ele cuidará da responsividade) -->
+                        <div class="plyr__video-embed" id="player">
+                            <iframe
+                                src="https://www.youtube.com/embed/E-ZaeTfrlGY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                                allowfullscreen
+                                allowtransparency
+                                allow="autoplay"
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
 
@@ -171,5 +175,8 @@
     </div>
 
     <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
 </body>
 </html>

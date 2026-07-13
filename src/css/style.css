@@ -787,3 +787,14 @@ p {
 /* Força os controles nativos do celular a sumirem completamente */
 video::-webkit-media-controls { display:none !important; }
 video::-webkit-media-controls-enclosure { display:none !important; }
+
+/* Customização das cores do Plyr para combinar com seu site */
+:root {
+    --plyr-color-main: #d19a2c; /* Amarelo dourado da sua paleta */
+    --plyr-video-control-background-hover: rgba(209, 154, 44, 0.2);
+}
+
+.plyr {
+    border-radius: 4px;
+    overflow: hidden;
+}

@@ -1,4 +1,11 @@
 window.addEventListener("load", function() {
+
+    // Inicializa o player customizado Plyr sobre o vídeo do YouTube
+    const player = new Plyr('#player', {
+        controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+        autoplay: true,
+        muted: true
+    });
     
     // ==========================================================================
     // 1. LÓGICA DAS ABAS (TABS) com Rolagem Automática
