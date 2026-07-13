@@ -9,7 +9,6 @@
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGAÇÃO -->
     <nav class="navbar">
         <div class="nav-container">
             <button class="nav-link active" data-tab="portfolio-tab">Portfólio</button>
@@ -21,7 +20,6 @@
 
     <div class="main-container">
 
-        <!-- CAPA DO PORTFÓLIO -->
         <header class="cover-hero-flex">
             <div class="hero-text-block">
                 <h1><span class="line-one">Edição de Vídeo Completa</span> <br>para o <span class="text-yellow">seu Negócio</span></h1>
@@ -32,17 +30,20 @@
             </div>
         </header>
 
-        <!-- ================= ABA 1: PORTFÓLIO ================= -->
         <div id="portfolio-tab" class="tab-content active">
             <section class="section-box">
                 <h2>Meu Portfólio</h2>
                 
-                <!-- 1. SHOWREEL NO TOPO -->
                 <h3 class="section-subtitle">🎬 Aprenda um pouco do meu processo de edição</h3>
                 <p style="font-size: 0.95rem; color: #9da0a0; margin-bottom: 15px;">Neste vídeo compartilho algumas das técnicas que utilizo no dia a dia para criar edições mais dinâmicas e envolventes.</p>
                 <div class="video-grid single-video">
-                    <div class="video-card headline-video">
-                        <!-- Container preparado para o Plyr (ele cuidará da responsividade) -->
+                    <div class="video-card headline-video" style="position: relative;">
+                        <button class="skip-btn manual-left" id="btn-skip-left" title="Voltar 10s"><i class="fa-solid fa-backward"></i></button>
+                        <button class="skip-btn manual-right" id="btn-skip-right" title="Avançar 10s"><i class="fa-solid fa-forward"></i></button>
+
+                        <div class="skip-feedback left" id="feedback-left"><i class="fa-solid fa-backward"></i><span>-10s</span></div>
+                        <div class="skip-feedback right" id="feedback-right"><i class="fa-solid fa-forward"></i><span>+10s</span></div>
+
                         <div class="plyr__video-embed" id="player">
                             <iframe
                                 src="https://www.youtube.com/embed/E-ZaeTfrlGY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
@@ -54,7 +55,6 @@
                     </div>
                 </div>
 
-                <!-- 2. COMPARATIVO ANTES VS DEPOIS -->
                 <h3 class="section-subtitle">🎥 Comparativo: Antes vs Depois</h3>
                 <div class="comparison-container">
                     <div class="video-box">
@@ -67,44 +67,35 @@
                     </div>
                 </div>
 
-                <!-- 3. CARROSSEL DOS CANAIS -->
                 <h3 class="section-subtitle">📺 Canais que já editei:</h3>
                 <div class="carousel-wrapper">
-                    <!-- Container que se move -->
                     <div class="channels-carousel-container">
                         
-                        <!-- SLIDE 1: MITADA PLAY -->
                         <div class="carousel-channel-item slide active">
                             <a href="https://www.youtube.com/@mitadaplay" target="_blank" rel="noopener noreferrer">
                             <img src="src/images/Canais_mitadaPlay.png" alt="Canal Mitada Play" class="carousel-brand-img">
                             </a>
                         </div>
 
-                        <!-- SLIDE 2: KEVIN MSPLAY -->
                         <div class="carousel-channel-item slide">
                             <a href="https://www.youtube.com/@kevinmsplay" target="_blank" rel="noopener noreferrer">
                             <img src="src/images/Canais_MSplay.png" alt="Canal Kevin MSplay" class="carousel-brand-img">
                             </a>
                         </div>
 
-                        <!-- SLIDE 3: QUÍMICA INTRIGANTE -->
                         <div class="carousel-channel-item slide">
                             <a href="https://www.youtube.com/@quimicaintrigante3193" target="_blank" rel="noopener noreferrer">
                             <img src="src\images\Canais_Qúimica.png" alt="Canal Química Intrigante" class="carousel-brand-img">
                             </a>
                         </div>
 
-                        <!-- SLIDE 4: VALE CONCURSOS -->
                         <div class="carousel-channel-item slide">
                             <a href="https://www.youtube.com/@valeconcursos" target="_blank" rel="noopener noreferrer">
                             <img src="src/images/Canais_Vale.png" alt="Canal Vale Concursos" class="carousel-brand-img">
                             </a>
                         </div>
 
-                    </div> <!-- FIM DO CONTAINER MOVEDOR -->
-
-                    <!-- Controles de Navegação -->
-                    <button class="carousel-btn prev-btn" aria-label="Slide anterior">
+                    </div> <button class="carousel-btn prev-btn" aria-label="Slide anterior">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     <button class="carousel-btn next-btn" aria-label="Próximo slide">
@@ -115,7 +106,6 @@
             </section>
         </div>
 
-        <!-- ================= ABA 2: SOBRE MIM ================= -->
         <div id="sobre-mim-tab" class="tab-content">
             <section class="section-box profile-section">
                 <div class="profile-container">
@@ -138,7 +128,6 @@
             </section>
         </div>
 
-        <!-- ================= ABA 3: SABER MAIS ================= -->
         <div id="saber-mais-tab" class="tab-content">
             <section class="section-box know-more-section">
                 <h2>Saber Mais</h2>
@@ -152,17 +141,14 @@
             </section>
         </div>
 
-        <!-- RODAPÉ -->
         <footer id="footer-contact" class="main-footer">
 
-            <!-- Ícones de fundo espalhados -->
             <i class="fa-solid fa-film bg-icon icon-1"></i>
             <i class="fa-solid fa-video bg-icon icon-2"></i>
             <i class="fa-solid fa-clapperboard bg-icon icon-3"></i>
             <i class="fa-solid fa-scissors bg-icon icon-4"></i>
             <i class="fa-solid fa-bolt bg-icon icon-5"></i>
             
-            <!-- Conteúdo principal do Rodapé -->
             <div class="footer-content">
                 <p>Gostou do meu trabalho? Vamos criar algo incrível juntos!</p>
                 <a href="https://mail.google.com" target="_blank" class="email-btn">

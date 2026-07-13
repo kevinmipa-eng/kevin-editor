@@ -262,7 +262,7 @@ p {
 .video-label.depois { background-color: #2a9d8f; color: #ffffff; }
 
 /* ==========================================================================
-   GRID DE VÍDEOS (YOUTUBE IFRAMES)
+   GRID DE VÍDEOS (PLYR E CONTROLES CUSTOMIZADOS)
    ========================================================================== */
 .video-grid {
     display: grid;
@@ -281,28 +281,129 @@ p {
     border-radius: 8px;
     text-align: center;
     border: 1px solid #234346;
+    position: relative;
+    overflow: hidden;
 }
 
-.video-iframe-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    margin-bottom: 12px;
+/* Customização de Cores do Plyr */
+:root {
+    --plyr-color-main: #d19a2c; /* Amarelo dourado */
+    --plyr-video-control-background-hover: rgba(209, 154, 44, 0.2);
+}
+
+.plyr {
     border-radius: 4px;
     overflow: hidden;
 }
 
-.video-iframe-wrapper iframe {
+/* ==========================================================================
+   BOTÕES DE SKIP MANUAL (TEMPORÁRIOS ESTILO YOUTUBE)
+   ========================================================================== */
+.skip-btn {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 210; /* Fica acima do player */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: opacity 0.3s ease, transform 0.25s ease, background 0.25s ease;
+    opacity: 0; /* Começam invisíveis */
+    pointer-events: none; /* Não clicáveis enquanto invisíveis */
 }
 
-.video-card h4 { 
-    color: #ffffff; 
-    font-size: 1.05rem; 
+/* Mostra os botões apenas quando o usuário interagir com o Plyr (ou passar o mouse no card) */
+.headline-video:hover .skip-btn,
+.plyr:not(.plyr--hide-controls) ~ .skip-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Se o player esconder os controles nativos, forçamos os botões a sumirem */
+.plyr.plyr--hide-controls ~ .skip-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.skip-btn:hover {
+    background: #d19a2c;
+    color: #121f20;
+    border-color: #d19a2c;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.skip-btn.manual-left { 
+    left: 35%; 
+}
+.skip-btn.manual-right { 
+    right: 35%; 
+}
+
+/* ==========================================================================
+   FEEDBACKS VISUAIS DE PULO (AFASTADOS PARA NÃO FICAREM EMBAIXO DOS BOTÕES)
+   ========================================================================== */
+.skip-feedback {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 1.2rem;
+    width: 65px;
+    height: 65px;
+    z-index: 200; 
+    pointer-events: none;
+    opacity: 0;
+    box-sizing: border-box;
+}
+
+.skip-feedback span {
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.skip-feedback.left { 
+    left: 27%; 
+}
+.skip-feedback.right { 
+    right: 27%; 
+}
+
+@keyframes flashFeedback {
+    0% { opacity: 0; transform: translateY(-50%) scale(0.7); }
+    30% { opacity: 1; transform: translateY(-50%) scale(1); }
+    70% { opacity: 1; transform: translateY(-50%) scale(1); }
+    100% { opacity: 0; transform: translateY(-50%) scale(0.7); }
+}
+
+.skip-feedback.animate {
+    animation: flashFeedback 0.6s ease forwards;
+}
+
+/* Ajustes de responsividade para telas menores */
+@media (max-width: 768px) {
+    .skip-feedback.left { left: 16%; }
+    .skip-feedback.right { right: 16%; }
+}
+
+@media (max-width: 480px) {
+    .skip-feedback.left { left: 10%; }
+    .skip-feedback.right { right: 10%; }
 }
 
 /* ==========================================================================
@@ -337,17 +438,16 @@ p {
    RODAPÉ REESTRUTURADO (COM ÍCONES EM PARALLAX/FUNDO)
    ========================================================================== */
 .main-footer {
-    position: relative; /* Necessário para ancorar os ícones absolutos */
-    overflow: hidden;   /* Impede que os ícones criem barras de rolagem na tela */
+    position: relative; 
+    overflow: hidden;   
     text-align: center;
     padding: 60px 20px;
     border-top: 2px solid #234346;
     margin-top: 40px;
-    background-color: #172d30; /* Dá uma leve profundidade ao fundo do rodapé */
+    background-color: #172d30; 
     border-radius: 12px 12px 0 0;
 }
 
-/* Garante que o texto e os links fiquem sempre à frente dos ícones */
 .footer-content {
     position: relative;
     z-index: 10;
@@ -358,53 +458,35 @@ p {
     color: #9da0a0; 
 }
 
-.instagram-link { 
-    display: inline-block; 
-    color: #d19a2c; 
-    text-decoration: none; 
-    font-size: 1.2rem; 
-    transition: 0.3s; 
-}
-
-.instagram-link:hover { 
-    color: #ffffff; 
-    transform: translateY(-2px); 
-}
-
-/* Estilo geral de todos os ícones de fundo */
+/* Estilo de ícones de fundo */
 .bg-icon {
     position: absolute;
-    color: #234346; /* Cor bem próxima ao fundo para ser sutil */
-    opacity: 0.25;  /* Opacidade baixa para não roubar a atenção */
-    z-index: 1;     /* Fica atrás do texto */
-    pointer-events: none; /* O utilizador pode clicar "através" do ícone */
+    color: #234346; 
+    opacity: 0.25;  
+    z-index: 1;     
+    pointer-events: none; 
     transition: transform 0.5s ease;
 }
 
-/* Leve animação quando passas o rato no footer inteiro */
 .main-footer:hover .bg-icon {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* Posicionamento individual de cada ícone (Espalhados) */
 .icon-1 { top: 15%; left: 8%; font-size: 3rem; transform: rotate(-15deg); }
 .icon-2 { bottom: 20%; left: 22%; font-size: 2.5rem; transform: rotate(20deg); }
 .icon-3 { top: 25%; right: 10%; font-size: 3.5rem; transform: rotate(12deg); }
 .icon-4 { bottom: 15%; right: 25%; font-size: 2.2rem; transform: rotate(-25deg); }
 .icon-5 { top: 50%; left: 48%; font-size: 1.8rem; transform: rotate(5deg); opacity: 0.15; }
 
-/* Esconde ou diminui os ícones em telas pequenas para não poluir o mobile */
-@media (max-width: 600px) {
-    .bg-icon { opacity: 0.12; }
-    .icon-1 { font-size: 2rem; }
-    .icon-3 { font-size: 2.2rem; }
-    .icon-2, .icon-5 { display: none; } /* Esconde alguns para poupar espaço */
-}
 /* ==========================================================================
-   RESPONSIVIDADE Mobile
+   RESPONSIVIDADE E ADAPTAÇÕES MOBILE
    ========================================================================== */
 @media (max-width: 768px) {
     .video-grid { grid-template-columns: 1fr; }
+    .skip-btn.manual-left { left: 25%; }
+    .skip-btn.manual-right { right: 25%; }
+    .skip-feedback.left { left: 23%; }
+    .skip-feedback.right { right: 23%; }
 }
 
 @media (max-width: 600px) {
@@ -418,79 +500,31 @@ p {
     .profile-section { flex-direction: column; text-align: center; }
     .comparison-container { grid-template-columns: 1fr; }
     .section-box { padding: 20px; }
+    .bg-icon { opacity: 0.12; }
+    .icon-1 { font-size: 2rem; }
+    .icon-3 { font-size: 2.2rem; }
+    .icon-2, .icon-5 { display: none; } 
 }
 
-/* ==========================================================================
-   CONTROLES CUSTOMIZADOS PARA O VÍDEO NATIVO (SHOWREEL)
-   ========================================================================== */
-.video-native-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    margin-bottom: 12px;
-    border-radius: 4px;
-    overflow: hidden;
-    background-color: #000;
-}
-
-.video-native-wrapper video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Contentor dos botões no canto superior direito */
-.video-controls-overlay {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: flex;
-    gap: 8px;
-    z-index: 20;
-}
-
-/* Estilo dos botões minimalistas */
-.overlay-btn {
-    background: rgba(23, 45, 48, 0.85); /* Fundo escuro transparente */
-    border: 1px solid rgba(209, 154, 44, 0.4);
-    color: #ffffff;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(4px); /* Efeito de vidro fosco */
-}
-
-.overlay-btn:hover {
-    background: #d19a2c;
-    color: #172d30;
-    border-color: #d19a2c;
-    transform: translateY(-1px);
-}
-
-/* Responsividade para telas pequenas */
 @media (max-width: 480px) {
-    .overlay-btn .btn-text {
-        display: none; /* Esconde o texto no mobile para deixar apenas o ícone */
+    .skip-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
     }
-    .overlay-btn {
-        padding: 8px;
-    }
+    .skip-btn.manual-left { left: 20%; }
+    .skip-btn.manual-right { right: 20%; }
+    .skip-feedback.left { left: 18%; }
+    .skip-feedback.right { right: 18%; }
 }
 
 /* ==========================================================================
-   ESTILIZAÇÃO DO CARROSSEL CORRIGIDO (PROPORÇÃO 1:1 - 1080x1080px)
+   ESTILIZAÇÃO DO CARROSSEL (PROPORÇÃO 1:1)
    ========================================================================== */
 .carousel-wrapper {
     position: relative;
     width: 100%;
-    max-width: 280px; /* Tamanho ideal para um logo quadrado não ficar gigante na tela */
+    max-width: 280px; 
     margin: 30px auto;
     overflow: hidden;
     border-radius: 12px;
@@ -505,10 +539,9 @@ p {
     position: relative;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 1/1; /* Força o container a ser sempre um quadrado perfeito */
+    aspect-ratio: 1/1; 
 }
 
-/* Oculta os slides por padrão e trata a transição */
 .carousel-channel-item.slide {
     position: absolute;
     opacity: 0;
@@ -518,18 +551,16 @@ p {
     text-align: center;
 }
 
-/* Exibe apenas o slide ativo */
 .carousel-channel-item.slide.active {
     opacity: 1;
     visibility: visible;
     position: relative;
 }
 
-/* Garante que a imagem preencha o espaço quadrado corretamente sem distorcer */
 .carousel-brand-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Preserva o logo inteiro dentro do quadrado */
+    object-fit: contain; 
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
@@ -539,7 +570,6 @@ p {
     transform: scale(1.05);
 }
 
-/* Legendas discretas abaixo dos logos */
 .caption {
     display: none;
     margin-top: 12px;
@@ -552,7 +582,6 @@ p {
     display: block;
 }
 
-/* Botões laterais de navegação ajustados para o formato quadrado */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -577,25 +606,22 @@ p {
     border-color: #d19a2c;
 }
 
-/* Afastados levemente para fora da imagem para não cobrir o logo */
 .prev-btn { left: -10px; }
 .next-btn { right: -10px; }
 
-/* Esconde as setas no mobile para não poluir, já que o autoplay resolve */
 @media (max-width: 480px) {
     .carousel-btn { display: none; }
-    .carousel-wrapper { max-width: 220px; } /* Um pouco menor no celular */
+    .carousel-wrapper { max-width: 220px; } 
 }
 
-/* ==========================
+/* ==========================================================================
    BOTÃO DE CONTATO POR EMAIL
-   ========================== */
-
+   ========================================================================== */
 .email-btn {
     display: inline-block;
     background-color: #d19a2c;
-    color: #121f20;          /* Cor do texto */
-    text-decoration: none;   /* Remove o sublinhado */
+    color: #121f20;          
+    text-decoration: none;   
     padding: 14px 28px;
     border-radius: 8px;
     font-weight: 700;
@@ -604,187 +630,17 @@ p {
 
 .email-btn:hover {
     background-color: #e6b84d;
-    color: #121f20;          /* Mantém a mesma cor no hover */
+    color: #121f20;          
 }
 
 .email-btn:visited,
 .email-btn:link,
 .email-btn:active {
-    color: #121f20;          /* Impede que fique azul ou roxo */
+    color: #121f20;          
     text-decoration: none;
 }
 
-/* ==========================================================================
-   NOVOS CONTROLES ESTILO YOUTUBE PARA O SHOWREEL
-   ========================================================================== */
-.video-native-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    margin-bottom: 12px;
-    border-radius: 4px;
-    overflow: hidden;
-    background-color: #000;
-}
-
-/* Painel de Controles Principal */
-.custom-video-controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.4), transparent);
-    padding: 10px 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 30;
-    opacity: 0; /* Invisível por padrão, aparece ao passar o mouse */
-    transition: opacity 0.3s ease;
-    box-sizing: border-box;
-}
-
-.video-native-wrapper:hover .custom-video-controls,
-.video-native-wrapper:focus-within .custom-video-controls {
-    opacity: 1;
-}
-
-/* Barra de Progresso estilo YouTube */
-.progress-container {
-    width: 100%;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    position: relative;
-    border-radius: 2px;
-    transition: height 0.1s ease;
-}
-
-.progress-container:hover {
-    height: 7px;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: #d19a2c; /* Amarelo dourado da sua paleta */
-    border-radius: 2px;
-    position: relative;
-}
-
-/* Indicador redondo na ponta da barra ao passar o mouse */
-.progress-bar::after {
-    content: '';
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    width: 12px;
-    height: 12px;
-    background: #d19a2c;
-    border-radius: 50%;
-    transition: transform 0.1s ease;
-}
-
-.progress-container:hover .progress-bar::after {
-    transform: translateY(-50%) scale(1);
-}
-
-/* Alinhamento dos botões abaixo da barra */
-.controls-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.controls-left, .controls-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.control-icon-btn {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 4px 8px;
-    transition: color 0.2s ease, transform 0.1s ease;
-}
-
-.control-icon-btn:hover {
-    color: #d19a2c;
-}
-
-.control-icon-btn:active {
-    transform: scale(0.9);
-}
-
-.video-time-display {
-    font-size: 0.85rem;
-    color: #e0e0e0;
-    font-family: monospace;
-    user-select: none;
-}
-
-/* Zonas de clique para o celular (Esquerda e Direita) */
-.touch-rewind-zone, .touch-forward-zone {
-    position: absolute;
-    top: 0;
-    width: 40%;
-    height: calc(100% - 45px); /* Não cobre a barra de baixo */
-    z-index: 25;
-    background: transparent;
-    -webkit-tap-highlight-color: transparent;
-    
-    /* ADICIONE ESTA LINHA: Permite que eventos simples de clique 'passem' para o vídeo */
-    pointer-events: none; 
-}
-.touch-rewind-zone { left: 0; }
-.touch-forward-zone { right: 0; }
-
-/* Animações e Feedbacks Visuais de Pulo (Double Tap) */
-.skip-feedback {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 15px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    font-size: 1.2rem;
-    width: 60px;
-    height: 60px;
-    z-index: 28;
-    pointer-events: none;
-    opacity: 0;
-    box-sizing: border-box;
-}
-.skip-feedback span {
-    font-size: 0.7rem;
-    font-weight: bold;
-}
-.skip-feedback.left { left: 15%; }
-.skip-feedback.right { right: 15%; }
-
-@keyframes flashFeedback {
-    0% { opacity: 0; transform: translateY(-50%) scale(0.7); }
-    30% { opacity: 1; transform: translateY(-50%) scale(1); }
-    70% { opacity: 1; transform: translateY(-50%) scale(1); }
-    100% { opacity: 0; transform: translateY(-50%) scale(0.7); }
-}
-.skip-feedback.animate {
-    animation: flashFeedback 0.6s ease forward;
-}
-
-/* Força os controles nativos do celular a sumirem completamente */
+/* Força os controles nativos do celular a sumirem completamente, mantendo apenas o Plyr */
 video::-webkit-media-controls { display:none !important; }
 video::-webkit-media-controls-enclosure { display:none !important; }
 
