@@ -85,11 +85,11 @@ body {
 }
 
 /* ==========================================================================
-   CAPA HERO FLEX
+   CAPA HERO FLEX (TEXTO SOBRE A IMAGEM CENTRALIZADA)
    ========================================================================== */
 .cover-hero-flex {
     width: 100%;
-    background-color: #1a2f31;
+    position: relative;
     margin-bottom: 30px;
     border-radius: 16px;
     overflow: hidden;
@@ -97,39 +97,48 @@ body {
     border: 1px solid #234346;
     display: flex;
     align-items: center;
-    position: relative;
-}
-
-.hero-text-block {
-    width: 55%;
-    padding: 40px;
-    z-index: 2;
-    position: relative;
+    justify-content: center;
+    min-height: 280px;
+    background-color: #1a2f31;
 }
 
 .hero-img-block {
-    width: 45%;
-    align-self: stretch;
-    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .cover-img-flex {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
+    filter: brightness(0.35);
+}
+
+.hero-text-block {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 40px 40px;
+    text-align: left;
 }
 
 .hero-text-block h1 {
-    font-size: 2.1rem;
+    font-size: 2.2rem;
     color: #ffffff;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     font-weight: 800;
     line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .line-one {
-    white-space: nowrap;
+    white-space: normal;
     color: #ffffff;
 }
 
@@ -138,10 +147,11 @@ body {
 }
 
 .hero-text-block p {
-    font-size: 1.1rem;
-    color: #9da0a0;
+    font-size: 1.15rem;
+    color: #e0e0e0;
     line-height: 1.5;
     margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* ==========================================================================
@@ -287,7 +297,7 @@ p {
 
 /* Customização de Cores do Plyr */
 :root {
-    --plyr-color-main: #d19a2c; /* Amarelo dourado */
+    --plyr-color-main: #d19a2c;
     --plyr-video-control-background-hover: rgba(209, 154, 44, 0.2);
 }
 
@@ -297,7 +307,7 @@ p {
 }
 
 /* ==========================================================================
-   BOTÕES DE SKIP MANUAL (TEMPORÁRIOS ESTILO YOUTUBE)
+   BOTÕES DE SKIP MANUAL
    ========================================================================== */
 .skip-btn {
     position: absolute;
@@ -310,24 +320,22 @@ p {
     height: 46px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 210; /* Fica acima do player */
+    z-index: 210;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
     transition: opacity 0.3s ease, transform 0.25s ease, background 0.25s ease;
-    opacity: 0; /* Começam invisíveis */
-    pointer-events: none; /* Não clicáveis enquanto invisíveis */
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* Mostra os botões apenas quando o usuário interagir com o Plyr (ou passar o mouse no card) */
 .headline-video:hover .skip-btn,
 .plyr:not(.plyr--hide-controls) ~ .skip-btn {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Se o player esconder os controles nativos, forçamos os botões a sumirem */
 .plyr.plyr--hide-controls ~ .skip-btn {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -340,15 +348,11 @@ p {
     transform: translateY(-50%) scale(1.1);
 }
 
-.skip-btn.manual-left { 
-    left: 35%; 
-}
-.skip-btn.manual-right { 
-    right: 35%; 
-}
+.skip-btn.manual-left { left: 35%; }
+.skip-btn.manual-right { right: 35%; }
 
 /* ==========================================================================
-   FEEDBACKS VISUAIS DE PULO (AFASTADOS PARA NÃO FICAREM EMBAIXO DOS BOTÕES)
+   FEEDBACKS VISUAIS DE PULO
    ========================================================================== */
 .skip-feedback {
     position: absolute;
@@ -377,12 +381,8 @@ p {
     font-weight: bold;
 }
 
-.skip-feedback.left { 
-    left: 27%; 
-}
-.skip-feedback.right { 
-    right: 27%; 
-}
+.skip-feedback.left { left: 27%; }
+.skip-feedback.right { right: 27%; }
 
 @keyframes flashFeedback {
     0% { opacity: 0; transform: translateY(-50%) scale(0.7); }
@@ -393,129 +393,6 @@ p {
 
 .skip-feedback.animate {
     animation: flashFeedback 0.6s ease forwards;
-}
-
-/* Ajustes de responsividade para telas menores */
-@media (max-width: 768px) {
-    .skip-feedback.left { left: 16%; }
-    .skip-feedback.right { right: 16%; }
-}
-
-@media (max-width: 480px) {
-    .skip-feedback.left { left: 10%; }
-    .skip-feedback.right { right: 10%; }
-}
-
-/* ==========================================================================
-   SABER MAIS
-   ========================================================================== */
-.channel-callout {
-    margin-top: 20px;
-    background: #234346;
-    padding: 25px;
-    border-radius: 8px;
-    text-align: center;
-    border-left: 5px solid #d19a2c;
-}
-
-.channel-callout h3 { margin-top: 0; }
-.channel-callout p { margin-bottom: 20px; color: #9da0a0; }
-
-.youtube-btn {
-    display: inline-block;
-    background-color: #e63946;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.youtube-btn:hover { background-color: #b71c1c; transform: scale(1.05); }
-
-/* ==========================================================================
-   RODAPÉ REESTRUTURADO (COM ÍCONES EM PARALLAX/FUNDO)
-   ========================================================================== */
-.main-footer {
-    position: relative; 
-    overflow: hidden;   
-    text-align: center;
-    padding: 60px 20px;
-    border-top: 2px solid #234346;
-    margin-top: 40px;
-    background-color: #172d30; 
-    border-radius: 12px 12px 0 0;
-}
-
-.footer-content {
-    position: relative;
-    z-index: 10;
-}
-
-.main-footer p { 
-    margin-bottom: 12px; 
-    color: #9da0a0; 
-}
-
-/* Estilo de ícones de fundo */
-.bg-icon {
-    position: absolute;
-    color: #234346; 
-    opacity: 0.25;  
-    z-index: 1;     
-    pointer-events: none; 
-    transition: transform 0.5s ease;
-}
-
-.main-footer:hover .bg-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.icon-1 { top: 15%; left: 8%; font-size: 3rem; transform: rotate(-15deg); }
-.icon-2 { bottom: 20%; left: 22%; font-size: 2.5rem; transform: rotate(20deg); }
-.icon-3 { top: 25%; right: 10%; font-size: 3.5rem; transform: rotate(12deg); }
-.icon-4 { bottom: 15%; right: 25%; font-size: 2.2rem; transform: rotate(-25deg); }
-.icon-5 { top: 50%; left: 48%; font-size: 1.8rem; transform: rotate(5deg); opacity: 0.15; }
-
-/* ==========================================================================
-   RESPONSIVIDADE E ADAPTAÇÕES MOBILE
-   ========================================================================== */
-@media (max-width: 768px) {
-    .video-grid { grid-template-columns: 1fr; }
-    .skip-btn.manual-left { left: 25%; }
-    .skip-btn.manual-right { right: 25%; }
-    .skip-feedback.left { left: 23%; }
-    .skip-feedback.right { right: 23%; }
-}
-
-@media (max-width: 600px) {
-    body { padding-top: 70px; }
-    .cover-hero-flex { flex-direction: column; }
-    .hero-text-block, .hero-img-block { width: 100%; }
-    .hero-text-block { padding: 25px; text-align: center; }
-    .hero-text-block h1 { font-size: 1.8rem; }
-    .line-one { white-space: normal; }
-    .nav-link { padding: 6px 10px; font-size: 0.95rem; }
-    .profile-section { flex-direction: column; text-align: center; }
-    .comparison-container { grid-template-columns: 1fr; }
-    .section-box { padding: 20px; }
-    .bg-icon { opacity: 0.12; }
-    .icon-1 { font-size: 2rem; }
-    .icon-3 { font-size: 2.2rem; }
-    .icon-2, .icon-5 { display: none; } 
-}
-
-@media (max-width: 480px) {
-    .skip-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 0.85rem;
-    }
-    .skip-btn.manual-left { left: 20%; }
-    .skip-btn.manual-right { right: 20%; }
-    .skip-feedback.left { left: 18%; }
-    .skip-feedback.right { right: 18%; }
 }
 
 /* ==========================================================================
@@ -609,10 +486,76 @@ p {
 .prev-btn { left: -10px; }
 .next-btn { right: -10px; }
 
-@media (max-width: 480px) {
-    .carousel-btn { display: none; }
-    .carousel-wrapper { max-width: 220px; } 
+/* ==========================================================================
+   SABER MAIS
+   ========================================================================== */
+.channel-callout {
+    margin-top: 20px;
+    background: #234346;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    border-left: 5px solid #d19a2c;
 }
+
+.channel-callout h3 { margin-top: 0; }
+.channel-callout p { margin-bottom: 20px; color: #9da0a0; }
+
+.youtube-btn {
+    display: inline-block;
+    background-color: #e63946;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.youtube-btn:hover { background-color: #b71c1c; transform: scale(1.05); }
+
+/* ==========================================================================
+   RODAPÉ REESTRUTURADO (COM ÍCONES EM PARALLAX/FUNDO)
+   ========================================================================== */
+.main-footer {
+    position: relative; 
+    overflow: hidden;   
+    text-align: center;
+    padding: 60px 20px;
+    border-top: 2px solid #234346;
+    margin-top: 40px;
+    background-color: #172d30; 
+    border-radius: 12px 12px 0 0;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 10;
+}
+
+.main-footer p { 
+    margin-bottom: 12px; 
+    color: #9da0a0; 
+}
+
+.bg-icon {
+    position: absolute;
+    color: #234346; 
+    opacity: 0.25;  
+    z-index: 1;     
+    pointer-events: none; 
+    transition: transform 0.5s ease;
+}
+
+.main-footer:hover .bg-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.icon-1 { top: 15%; left: 8%; font-size: 3rem; transform: rotate(-15deg); }
+.icon-2 { bottom: 20%; left: 22%; font-size: 2.5rem; transform: rotate(20deg); }
+.icon-3 { top: 25%; right: 10%; font-size: 3.5rem; transform: rotate(12deg); }
+.icon-4 { bottom: 15%; right: 25%; font-size: 2.2rem; transform: rotate(-25deg); }
+.icon-5 { top: 50%; left: 48%; font-size: 1.8rem; transform: rotate(5deg); opacity: 0.15; }
 
 /* ==========================================================================
    BOTÃO DE CONTATO POR EMAIL
@@ -640,17 +583,47 @@ p {
     text-decoration: none;
 }
 
-/* Força os controles nativos do celular a sumirem completamente, mantendo apenas o Plyr */
+/* ==========================================================================
+   RESPONSIVIDADE E ADAPTAÇÕES MOBILE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .video-grid { grid-template-columns: 1fr; }
+    .skip-btn.manual-left { left: 25%; }
+    .skip-btn.manual-right { right: 25%; }
+    .skip-feedback.left { left: 23%; }
+    .skip-feedback.right { right: 23%; }
+}
+
+@media (max-width: 600px) {
+    body { padding-top: 70px; }
+    .cover-hero-flex { min-height: 240px; }
+    .hero-text-block { padding: 25px 15px; }
+    .hero-text-block h1 { font-size: 1.6rem; }
+    .hero-text-block p { font-size: 0.95rem; }
+    .nav-link { padding: 6px 10px; font-size: 0.95rem; }
+    .profile-section { flex-direction: column; text-align: center; }
+    .comparison-container { grid-template-columns: 1fr; }
+    .section-box { padding: 20px; }
+    .bg-icon { opacity: 0.12; }
+    .icon-1 { font-size: 2rem; }
+    .icon-3 { font-size: 2.2rem; }
+    .icon-2, .icon-5 { display: none; } 
+}
+
+@media (max-width: 480px) {
+    .skip-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
+    }
+    .skip-btn.manual-left { left: 20%; }
+    .skip-btn.manual-right { right: 20%; }
+    .skip-feedback.left { left: 18%; }
+    .skip-feedback.right { right: 18%; }
+    .carousel-btn { display: none; }
+    .carousel-wrapper { max-width: 220px; } 
+}
+
+/* Controls override */
 video::-webkit-media-controls { display:none !important; }
 video::-webkit-media-controls-enclosure { display:none !important; }
-
-/* Customização das cores do Plyr para combinar com seu site */
-:root {
-    --plyr-color-main: #d19a2c; /* Amarelo dourado da sua paleta */
-    --plyr-video-control-background-hover: rgba(209, 154, 44, 0.2);
-}
-
-.plyr {
-    border-radius: 4px;
-    overflow: hidden;
-}
