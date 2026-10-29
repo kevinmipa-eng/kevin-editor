@@ -21,6 +21,11 @@ body {
     max-width: 900px;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ==========================================================================
    BARRA DE NAVEGAÇÃO (FIXA)
    ========================================================================== */
@@ -194,84 +199,6 @@ p {
 }
 
 /* ==========================================================================
-   SOBRE MIM
-   ========================================================================== */
-.profile-section {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.profile-container { 
-    flex-shrink: 0; 
-}
-
-.profile-pic {
-    width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #d19a2c;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.profile-text { 
-    flex-grow: 1; 
-}
-
-.experience-list { 
-    margin-top: 15px; 
-    padding-left: 20px; 
-    color: #e0e0e0; 
-}
-
-.experience-list li { 
-    margin-bottom: 10px; 
-    line-height: 1.5; 
-}
-
-/* ==========================================================================
-   COMPARATIVO ANTES E DEPOIS (.WEBM)
-   ========================================================================== */
-.comparison-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.video-box {
-    position: relative;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid #234346;
-}
-
-.video-box video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.video-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 4px 10px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 4px;
-    z-index: 5;
-}
-
-.video-label.antes { background-color: #e63946; color: #ffffff; }
-.video-label.depois { background-color: #2a9d8f; color: #ffffff; }
-
-/* ==========================================================================
    GRID DE VÍDEOS (PLYR E CONTROLES CUSTOMIZADOS)
    ========================================================================== */
 .video-grid {
@@ -306,9 +233,7 @@ p {
     overflow: hidden;
 }
 
-/* ==========================================================================
-   BOTÕES DE SKIP MANUAL
-   ========================================================================== */
+/* Botões de Skip Manual */
 .skip-btn {
     position: absolute;
     top: 50%;
@@ -351,9 +276,7 @@ p {
 .skip-btn.manual-left { left: 35%; }
 .skip-btn.manual-right { right: 35%; }
 
-/* ==========================================================================
-   FEEDBACKS VISUAIS DE PULO
-   ========================================================================== */
+/* Feedbacks Visuais de Pulo */
 .skip-feedback {
     position: absolute;
     top: 50%;
@@ -396,74 +319,181 @@ p {
 }
 
 /* ==========================================================================
-   ESTILIZAÇÃO DO CARROSSEL (PROPORÇÃO 1:1)
+   CARROSSEL PRINCIPAL DE CANAIS E TRABALHOS INTERNOS (PROPORÇÃO 16:9)
    ========================================================================== */
-.carousel-wrapper {
+.main-channels-carousel-wrapper {
     position: relative;
     width: 100%;
-    max-width: 280px; 
-    margin: 30px auto;
+    margin-top: 15px;
+}
+
+.channels-slides-container {
+    position: relative;
+    width: 100%;
     overflow: hidden;
-    border-radius: 12px;
-    background-color: #121f20;
-    padding: 20px;
-    border: 1px solid #234346;
+    border-radius: 10px;
 }
 
-.channels-carousel-container {
-    display: flex;
-    width: 100%;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1/1; 
-}
-
-.carousel-channel-item.slide {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease-in-out, visibility 0.4s;
-    width: 100%;
-    text-align: center;
-}
-
-.carousel-channel-item.slide.active {
-    opacity: 1;
-    visibility: visible;
-    position: relative;
-}
-
-.carousel-brand-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.carousel-brand-img:hover {
-    transform: scale(1.05);
-}
-
-.caption {
+.channel-slide-item {
     display: none;
-    margin-top: 12px;
-    font-size: 0.95rem;
-    color: #9da0a0;
-    font-weight: 500;
+    width: 100%;
+    animation: fadeIn 0.4s ease-in-out;
 }
 
-.caption.active {
+.channel-slide-item.active {
     display: block;
 }
 
-.carousel-btn {
+.channel-slide-content {
+    display: flex;
+    align-items: center;
+    background-color: #121f20;
+    border: 1px solid #234346;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+}
+
+.channel-logo-area {
+    flex-shrink: 0;
+    width: 180px;
+    align-self: stretch; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #172d30;
+    border-radius: 8px;
+    border: 1px solid #234346;
+    padding: 15px;
+}
+
+.channel-main-logo {
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
+
+.channel-main-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Container do carrossel interno de trabalhos em proporção exata 16:9 */
+.channel-works-carousel-container {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    background: #172d30;
+    border: 1px solid #234346;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.works-slides-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-slide-item {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease-in-out, visibility 0.35s;
+    width: 88%;
+    height: 88%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #121f20;
+    border: 1px solid #234346;
+}
+
+.work-slide-item.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.work-slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Vídeos de comparação (Química Intrigante): Lado a lado (row) em 16:9 */
+.work-slide-item.comparison-stack {
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px;
+    background: #121f20;
+}
+
+/* Vídeo individual ocupando todo o espaço disponível */
+.work-slide-item.single-video-work {
+    flex-direction: column;
+    padding: 8px;
+    background: #121f20;
+}
+
+.stack-video-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #234346;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+}
+
+/* No layout lado a lado, cada vídeo ocupa 50% da largura com altura total */
+.work-slide-item.comparison-stack .stack-video-box {
+    width: 50%;
+    height: 100%;
+}
+
+.stack-video-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    display: block;
+}
+
+.video-label {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    z-index: 5;
+}
+
+.video-label.antes { background-color: #e63946; color: #ffffff; }
+.video-label.depois { background-color: #2a9d8f; color: #ffffff; }
+
+/* Botões do carrossel interno de trabalhos */
+.work-carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(23, 45, 48, 0.9);
+    background: rgba(23, 45, 48, 0.85);
     border: 1px solid rgba(209, 154, 44, 0.4);
     color: #ffffff;
     width: 36px;
@@ -475,16 +505,83 @@ p {
     justify-content: center;
     transition: all 0.2s ease;
     z-index: 10;
+    font-size: 1rem;
 }
 
-.carousel-btn:hover {
+.work-carousel-btn:hover {
     background: #d19a2c;
     color: #172d30;
     border-color: #d19a2c;
 }
 
-.prev-btn { left: -10px; }
-.next-btn { right: -10px; }
+.prev-work-btn { left: 10px; }
+.next-work-btn { right: 10px; }
+
+/* Botões do carrossel principal de canais */
+.channel-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(23, 45, 48, 0.9);
+    border: 1px solid rgba(209, 154, 44, 0.4);
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    font-size: 1.1rem;
+}
+
+.channel-carousel-btn:hover {
+    background: #d19a2c;
+    color: #172d30;
+    border-color: #d19a2c;
+}
+
+.prev-channel-btn { left: -22px; }
+.next-channel-btn { right: -22px; }
+
+/* ==========================================================================
+   SOBRE MIM
+   ========================================================================== */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile-container { 
+    flex-shrink: 0; 
+}
+
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #d19a2c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-text { 
+    flex-grow: 1; 
+}
+
+.experience-list { 
+    margin-top: 15px; 
+    padding-left: 20px; 
+    color: #e0e0e0; 
+}
+
+.experience-list li { 
+    margin-bottom: 10px; 
+    line-height: 1.5; 
+}
 
 /* ==========================================================================
    SABER MAIS
@@ -557,9 +654,6 @@ p {
 .icon-4 { bottom: 15%; right: 25%; font-size: 2.2rem; transform: rotate(-25deg); }
 .icon-5 { top: 50%; left: 48%; font-size: 1.8rem; transform: rotate(5deg); opacity: 0.15; }
 
-/* ==========================================================================
-   BOTÃO DE CONTATO POR EMAIL
-   ========================================================================== */
 .email-btn {
     display: inline-block;
     background-color: #d19a2c;
@@ -592,6 +686,17 @@ p {
     .skip-btn.manual-right { right: 25%; }
     .skip-feedback.left { left: 23%; }
     .skip-feedback.right { right: 23%; }
+
+    .channel-slide-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .channel-logo-area {
+        width: 100%;
+        height: 100px;
+    }
+    .prev-channel-btn { left: -10px; }
+    .next-channel-btn { right: -10px; }
 }
 
 @media (max-width: 600px) {
@@ -602,7 +707,6 @@ p {
     .hero-text-block p { font-size: 0.95rem; }
     .nav-link { padding: 6px 10px; font-size: 0.95rem; }
     .profile-section { flex-direction: column; text-align: center; }
-    .comparison-container { grid-template-columns: 1fr; }
     .section-box { padding: 20px; }
     .bg-icon { opacity: 0.12; }
     .icon-1 { font-size: 2rem; }
@@ -620,8 +724,6 @@ p {
     .skip-btn.manual-right { right: 20%; }
     .skip-feedback.left { left: 18%; }
     .skip-feedback.right { right: 18%; }
-    .carousel-btn { display: none; }
-    .carousel-wrapper { max-width: 220px; } 
 }
 
 /* Controls override */

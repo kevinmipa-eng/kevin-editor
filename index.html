@@ -57,53 +57,121 @@
                     </div>
                 </div>
 
-                <h3 class="section-subtitle">🎥 Comparativo: Antes vs Depois</h3>
-                <div class="comparison-container">
-                    <div class="video-box">
-                        <span class="video-label antes">Antes</span>
-                        <video src="src/videos/Antes_video_1.webm" autoplay loop muted playsinline></video>
-                    </div>
-                    <div class="video-box">
-                        <span class="video-label depois">Depois</span>
-                        <video src="src/videos/Depois_video_1.webm" autoplay loop muted playsinline></video>
-                    </div>
-                </div>
-
+                <!-- ================= CARROSSEL PRINCIPAL DE CANAIS ================= -->
                 <h3 class="section-subtitle">📺 Canais que já editei:</h3>
-                <div class="carousel-wrapper">
-                    <div class="channels-carousel-container">
-                        
-                        <div class="carousel-channel-item slide active">
-                            <a href="https://www.youtube.com/@mitadaplay" target="_blank" rel="noopener noreferrer">
-                                <img src="src/images/Canais_mitadaPlay.png" alt="Canal Mitada Play" class="carousel-brand-img">
-                            </a>
+                
+                <div class="main-channels-carousel-wrapper">
+                    <div class="channels-slides-container">
+
+                        <!-- CANAL 1: MITADA PLAY -->
+                        <div class="channel-slide-item active">
+                            <div class="channel-slide-content">
+                                <div class="channel-logo-area">
+                                    <a href="https://www.youtube.com/@mitadaplay" target="_blank" rel="noopener noreferrer">
+                                        <img src="src/images/Canais_mitadaPlay.png" alt="Canal Mitada Play" class="channel-main-logo">
+                                    </a>
+                                </div>
+                                <div class="channel-works-carousel-container">
+                                    <div class="works-slides-track">
+                                        <div class="work-slide-item active"><img src="src/images/mitadaThumb1.webp" alt="Mitada Thumb 1"></div>
+                                        <div class="work-slide-item"><img src="src/images/mitadaThumb2.webp" alt="Mitada Thumb 2"></div>
+                                        <div class="work-slide-item"><img src="src/images/mitadaThumb3.webp" alt="Mitada Thumb 3"></div>
+                                        <div class="work-slide-item"><img src="src/images/mitadaThumb4.webp" alt="Mitada Thumb 4"></div>
+                                        <div class="work-slide-item single-video-work">
+                                            <div class="stack-video-box">
+                                                <video src="src/videos/antesDepoisMitada.webm" autoplay loop muted playsinline></video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="work-carousel-btn prev-work-btn" aria-label="Trabalho anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="work-carousel-btn next-work-btn" aria-label="Próximo trabalho"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="carousel-channel-item slide">
-                            <a href="https://www.youtube.com/@kevinmsplay" target="_blank" rel="noopener noreferrer">
-                                <img src="src/images/Canais_MSplay.png" alt="Canal Kevin MSplay" class="carousel-brand-img">
-                            </a>
+                        <!-- CANAL 2: KEVIN MSPLAY -->
+                        <div class="channel-slide-item">
+                            <div class="channel-slide-content">
+                                <div class="channel-logo-area">
+                                    <a href="https://www.youtube.com/@kevinmsplay" target="_blank" rel="noopener noreferrer">
+                                        <img src="src/images/Canais_MSplay.png" alt="Canal Kevin MSplay" class="channel-main-logo">
+                                    </a>
+                                </div>
+                                <div class="channel-works-carousel-container">
+                                    <div class="works-slides-track">
+                                        <div class="work-slide-item active"><img src="src/images/mjsplayThumb1.webp" alt="MSplay Thumb 1" onerror="this.src='src/images/msplayThumb1.webp'"></div>
+                                        <div class="work-slide-item"><img src="src/images/mjsplayThumb2.webp" alt="MSplay Thumb 2" onerror="this.src='src/images/msplayThumb2.webp'"></div>
+                                        <div class="work-slide-item"><img src="src/images/mjsplayThumb3.webp" alt="MSplay Thumb 3" onerror="this.src='src/images/msplayThumb3.webp'"></div>
+                                        <div class="work-slide-item"><img src="src/images/mjsplayThumb4.webp" alt="MSplay Thumb 4" onerror="this.src='src/images/msplayThumb4.webp'"></div>
+                                    </div>
+                                    <button class="work-carousel-btn prev-work-btn" aria-label="Trabalho anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="work-carousel-btn next-work-btn" aria-label="Próximo trabalho"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="carousel-channel-item slide">
-                            <a href="https://www.youtube.com/@quimicaintrigante3193" target="_blank" rel="noopener noreferrer">
-                                <img src="src/images/Canais_Qúimica.png" alt="Canal Química Intrigante" class="carousel-brand-img">
-                            </a>
+                        <!-- CANAL 3: QUÍMICA INTRIGANTE -->
+                        <div class="channel-slide-item">
+                            <div class="channel-slide-content">
+                                <div class="channel-logo-area">
+                                    <a href="https://www.youtube.com/@quimicaintrigante3193" target="_blank" rel="noopener noreferrer">
+                                        <img src="src/images/Canais_Qúimica.png" alt="Canal Química Intrigante" class="channel-main-logo">
+                                    </a>
+                                </div>
+                                <div class="channel-works-carousel-container">
+                                    <div class="works-slides-track">
+                                        <div class="work-slide-item"><img src="src/images/quimicaThumb1.webp" alt="Química Thumb 1"></div>
+                                        <div class="work-slide-item"><img src="src/images/QuimicaThumb2.webp" alt="Química Thumb 2"></div>
+                                        <div class="work-slide-item"><img src="src/images/QuimicaThumb3.webp" alt="Química Thumb 3"></div>
+                                        <div class="work-slide-item"><img src="src/images/quimicaThumb4.webp" alt="Química Thumb 4"></div>
+                                        <div class="work-slide-item comparison-stack active">
+                                            <div class="stack-video-box">
+                                                <span class="video-label antes">Antes</span>
+                                                <video src="src/videos/Antes_video_1.webm" autoplay loop muted playsinline></video>
+                                            </div>
+                                            <div class="stack-video-box">
+                                                <span class="video-label depois">Depois</span>
+                                                <video src="src/videos/Depois_video_1.webm" autoplay loop muted playsinline></video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="work-carousel-btn prev-work-btn" aria-label="Trabalho anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="work-carousel-btn next-work-btn" aria-label="Próximo trabalho"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="carousel-channel-item slide">
-                            <a href="https://www.youtube.com/@valeconcursos" target="_blank" rel="noopener noreferrer">
-                                <img src="src/images/Canais_Vale.png" alt="Canal Vale Concursos" class="carousel-brand-img">
-                            </a>
+                        <!-- CANAL 4: VALE CONCURSOS -->
+                        <div class="channel-slide-item">
+                            <div class="channel-slide-content">
+                                <div class="channel-logo-area">
+                                    <a href="https://www.youtube.com/@valeconcursos" target="_blank" rel="noopener noreferrer">
+                                        <img src="src/images/Canais_Vale.png" alt="Canal Vale Concursos" class="channel-main-logo">
+                                    </a>
+                                </div>
+                                <div class="channel-works-carousel-container">
+                                    <div class="works-slides-track">
+                                        <div class="work-slide-item active"><img src="src/images/valeThumb1.webp" alt="Vale Thumb 1"></div>
+                                        <div class="work-slide-item"><img src="src/images/valeThumb2.webp" alt="Vale Thumb 2"></div>
+                                        <div class="work-slide-item"><img src="src/images/valeThumb3.webp" alt="Vale Thumb 3"></div>
+                                        <div class="work-slide-item"><img src="src/images/valeThumb4.webp" alt="Vale Thumb 4"></div>
+                                        <div class="work-slide-item single-video-work">
+                                            <div class="stack-video-box">
+                                                <video src="src/videos/antesDepoisVale.webm" autoplay loop muted playsinline></video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="work-carousel-btn prev-work-btn" aria-label="Trabalho anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                                    <button class="work-carousel-btn next-work-btn" aria-label="Próximo trabalho"><i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
                         </div>
 
-                    </div> 
-                    <button class="carousel-btn prev-btn" aria-label="Slide anterior">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <button class="carousel-btn next-btn" aria-label="Próximo slide">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
+                    </div>
+
+                    <!-- Botões principais do carrossel de canais -->
+                    <button class="channel-carousel-btn prev-channel-btn" aria-label="Canal anterior"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="channel-carousel-btn next-channel-btn" aria-label="Próximo canal"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
                 
             </section>

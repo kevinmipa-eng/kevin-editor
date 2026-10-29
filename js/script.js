@@ -10,66 +10,47 @@ window.addEventListener("load", function() {
     const btnSkipRight = document.getElementById("btn-skip-right");
 
     if (playerElement) {
-        // Inicializa o Plyr exatamente com as configurações corretas de autoplay e mute
         const player = new Plyr('#player', {
             controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
             autoplay: true,
             muted: true
         });
 
-        // Função para engatilhar a animação do feedback visual
         function triggerAnimation(element) {
             if (!element) return;
             element.classList.remove("animate");
-            void element.offsetWidth; // Truque para forçar o reset da animação CSS
+            void element.offsetWidth;
             element.classList.add("animate");
             setTimeout(() => element.classList.remove("animate"), 600);
         }
 
-        // Aguarda o Plyr estar totalmente pronto para mapear as interações
         player.on('ready', () => {
             const plyrContainer = player.elements.container;
 
-            // --- CONTROLE DIRETO E SEGURO DE LEGENDAS (Mute/Unmute) ---
-            
-            // Função para atualizar as legendas baseando-se no estado de mute atual
             function syncCaptionsWithMute() {
-                // Usamos um curtíssimo delay para garantir que o Plyr já mudou o estado interno
                 setTimeout(() => {
                     const isMuted = player.muted || player.volume === 0;
                     if (!isMuted) {
-                        // Se tem som: desativa legenda
                         player.captions.active = false;
-                        if (typeof player.toggleCaptions === "function") {
-                            player.toggleCaptions(false);
-                        }
+                        if (typeof player.toggleCaptions === "function") player.toggleCaptions(false);
                     } else {
-                        // Se está mutado: ativa legenda
                         player.captions.active = true;
-                        if (typeof player.toggleCaptions === "function") {
-                            player.toggleCaptions(true);
-                        }
+                        if (typeof player.toggleCaptions === "function") player.toggleCaptions(true);
                     }
                 }, 50);
             }
 
-            // 1. Monitora cliques diretamente no botão de Mute do Plyr
             const muteBtn = plyrContainer.querySelector('.plyr__control[data-plyr="mute"]');
-            if (muteBtn) {
-                muteBtn.addEventListener('click', syncCaptionsWithMute);
-            }
+            if (muteBtn) muteBtn.addEventListener('click', syncCaptionsWithMute);
 
-            // 2. Monitora mudanças e cliques na barra de volume do Plyr
             const volumeInput = plyrContainer.querySelector('.plyr__volume input');
             if (volumeInput) {
                 volumeInput.addEventListener('input', syncCaptionsWithMute);
                 volumeInput.addEventListener('change', syncCaptionsWithMute);
             }
 
-            // 3. Segurança extra: monitora o evento global de alteração de volume
             player.on('volumechange', syncCaptionsWithMute);
             
-            // --- EVENTOS DOS BOTÕES MANUAIS (Clique simples temporário) ---
             if (btnSkipLeft && btnSkipRight) {
                 btnSkipLeft.addEventListener("click", function(e) {
                     e.stopPropagation(); 
@@ -83,54 +64,6 @@ window.addEventListener("load", function() {
                     triggerAnimation(feedbackRight);
                 });
             }
-
-            // --- DETECÇÃO DE DUPLO TOQUE EM CELULARES/TABLETS (Na tela) ---
-            let tapCount = 0;
-            let tapTimeout;
-
-            plyrContainer.addEventListener("touchend", function(e) {
-                if (e.target.closest('.skip-btn') || e.target.closest('.plyr__controls')) return;
-
-                const containerWidth = plyrContainer.offsetWidth;
-                const rect = plyrContainer.getBoundingClientRect();
-                const touchX = e.changedTouches[0].clientX - rect.left;
-
-                tapCount++;
-
-                if (tapCount === 1) {
-                    tapTimeout = setTimeout(function() {
-                        tapCount = 0;
-                    }, 300); 
-                } else if (tapCount === 2) {
-                    clearTimeout(tapTimeout);
-                    tapCount = 0;
-
-                    if (touchX < containerWidth / 2) {
-                        player.currentTime = Math.max(0, player.currentTime - 10);
-                        triggerAnimation(feedbackLeft);
-                    } else {
-                        player.currentTime = Math.min(player.duration, player.currentTime + 10);
-                        triggerAnimation(feedbackRight);
-                    }
-                }
-            });
-
-            // --- DETECÇÃO DE DUPLO CLIQUE EM COMPUTADORES (Na tela) ---
-            plyrContainer.addEventListener("dblclick", function(e) {
-                if (e.target.closest('.skip-btn') || e.target.closest('.plyr__controls')) return;
-
-                const containerWidth = plyrContainer.offsetWidth;
-                const rect = plyrContainer.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-
-                if (clickX < containerWidth / 2) {
-                    player.currentTime = Math.max(0, player.currentTime - 10);
-                    triggerAnimation(feedbackLeft);
-                } else {
-                    player.currentTime = Math.min(player.duration, player.currentTime + 10);
-                    triggerAnimation(feedbackRight);
-                }
-            });
         });
     }
 
@@ -144,11 +77,9 @@ window.addEventListener("load", function() {
         link.addEventListener("click", function() {
             const targetTab = this.getAttribute("data-tab");
 
-            // Altera classe ativa dos botões da Navbar
             navLinks.forEach(l => l.classList.remove("active"));
             this.classList.add("active");
 
-            // Exibe a aba correta e oculta as demais
             tabContents.forEach(content => {
                 if (content.id === targetTab) {
                     content.classList.add("active");
@@ -157,7 +88,6 @@ window.addEventListener("load", function() {
                 }
             });
 
-            // Rola a página suavemente até o início do conteúdo da aba ativa
             const activeTab = document.getElementById(targetTab);
             const firstSection = activeTab.querySelector(".section-box");
 
@@ -171,50 +101,203 @@ window.addEventListener("load", function() {
     });
 
     // ==========================================================================
-    // 3. LÓGICA DO CARROSSEL DE CANAIS
+    // 3. CARROSSEL PRINCIPAL DE CANAIS E TRABALHOS COM AUTOPLAY E SETAS INTERNAS FUNCIONAIS
     // ==========================================================================
-    const slides = document.querySelectorAll(".carousel-channel-item.slide");
-    const captions = document.querySelectorAll(".caption");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    let currentIndex = 0;
-    let autoPlayTimer;
+    const channelSlides = document.querySelectorAll(".channel-slide-item");
+    const prevChannelBtn = document.querySelector(".prev-channel-btn");
+    const nextChannelBtn = document.querySelector(".next-channel-btn");
+    const channelsWrapper = document.querySelector(".main-channels-carousel-wrapper");
 
-    if (slides.length > 0 && prevBtn && nextBtn) {
-        
-        function updateCarousel(index) {
-            slides.forEach(s => s.classList.remove("active"));
-            captions.forEach(c => c.classList.remove("active"));
+    let currentChannelIndex = 0;
+    let channelInterval = null;
+    let currentWorkInterval = null;
+    let isPausedByHoverOrTouch = false;
 
-            slides[index].classList.add("active");
-            if (captions[index]) {
-                captions[index].classList.add("active");
+    function getSlideDuration(slideItem) {
+        if (slideItem.querySelector("video") || slideItem.classList.contains("comparison-stack")) {
+            return 9000;
+        }
+        return 3000;
+    }
+
+    function scheduleNextWorkSlide(channelSlide) {
+        if (currentWorkInterval) {
+            clearTimeout(currentWorkInterval);
+            currentWorkInterval = null;
+        }
+
+        if (isPausedByHoverOrTouch) return;
+
+        const workSlides = channelSlide.querySelectorAll(".work-slide-item");
+        if (workSlides.length === 0) return;
+
+        let activeIndex = 0;
+        workSlides.forEach((w, idx) => {
+            if (w.classList.contains("active")) activeIndex = idx;
+        });
+
+        const currentSlide = workSlides[activeIndex];
+        const duration = getSlideDuration(currentSlide);
+
+        currentWorkInterval = setTimeout(() => {
+            if (!isPausedByHoverOrTouch) {
+                let nextIndex = (activeIndex + 1) % workSlides.length;
+                workSlides.forEach(w => w.classList.remove("active"));
+                workSlides[nextIndex].classList.add("active");
+                scheduleNextWorkSlide(channelSlide);
             }
-        }
+        }, duration);
+    }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateCarousel(currentIndex);
-        }
+    function setupWorkCarousels() {
+        channelSlides.forEach(channelSlide => {
+            const workSlides = channelSlide.querySelectorAll(".work-slide-item");
+            const prevWorkBtn = channelSlide.querySelector(".prev-work-btn");
+            const nextWorkBtn = channelSlide.querySelector(".next-work-btn");
 
-        function resetAutoPlay() {
-            clearInterval(autoPlayTimer);
-            autoPlayTimer = setInterval(nextSlide, 4000);
-        }
+            if (!prevWorkBtn || !nextWorkBtn || workSlides.length === 0) return;
 
-        nextBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            nextSlide();
-            resetAutoPlay();
+            // Substitui os botões para limpar eventos antigos
+            const newPrev = prevWorkBtn.cloneNode(true);
+            const newNext = nextWorkBtn.cloneNode(true);
+            prevWorkBtn.parentNode.replaceChild(newPrev, prevWorkBtn);
+            nextWorkBtn.parentNode.replaceChild(newNext, nextWorkBtn);
+
+            newNext.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (currentWorkInterval) {
+                    clearTimeout(currentWorkInterval);
+                    currentWorkInterval = null;
+                }
+
+                let activeIndex = 0;
+                workSlides.forEach((w, idx) => {
+                    if (w.classList.contains("active")) activeIndex = idx;
+                });
+
+                workSlides[activeIndex].classList.remove("active");
+                let nextIndex = (activeIndex + 1) % workSlides.length;
+                workSlides[nextIndex].classList.add("active");
+
+                if (!isPausedByHoverOrTouch) {
+                    scheduleNextWorkSlide(channelSlide);
+                }
+            });
+
+            newPrev.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (currentWorkInterval) {
+                    clearTimeout(currentWorkInterval);
+                    currentWorkInterval = null;
+                }
+
+                let activeIndex = 0;
+                workSlides.forEach((w, idx) => {
+                    if (w.classList.contains("active")) activeIndex = idx;
+                });
+
+                workSlides[activeIndex].classList.remove("active");
+                let prevIndex = (activeIndex - 1 + workSlides.length) % workSlides.length;
+                workSlides[prevIndex].classList.add("active");
+
+                if (!isPausedByHoverOrTouch) {
+                    scheduleNextWorkSlide(channelSlide);
+                }
+            });
         });
+    }
 
-        prevBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateCarousel(currentIndex);
-            resetAutoPlay();
-        });
+    function updateChannelSlide(index) {
+        if (currentWorkInterval) {
+            clearTimeout(currentWorkInterval);
+            currentWorkInterval = null;
+        }
 
-        resetAutoPlay();
+        channelSlides.forEach(slide => slide.classList.remove("active"));
+        const activeChannel = channelSlides[index];
+        activeChannel.classList.add("active");
+
+        // Faz o último slide (vídeo) ser o primeiro a aparecer ao trocar de canal
+        const workSlides = activeChannel.querySelectorAll(".work-slide-item");
+        if (workSlides.length > 0) {
+            workSlides.forEach(w => w.classList.remove("active"));
+            const lastIndex = workSlides.length - 1; 
+            workSlides[lastIndex].classList.add("active");
+        }
+
+        if (!isPausedByHoverOrTouch) {
+            scheduleNextWorkSlide(activeChannel);
+        }
+    }
+
+    function startChannelAutoplay() {
+        if (channelInterval) {
+            clearInterval(channelInterval);
+            channelInterval = null;
+        }
+
+        if (isPausedByHoverOrTouch) return;
+
+        channelInterval = setInterval(() => {
+            if (!isPausedByHoverOrTouch) {
+                currentChannelIndex = (currentChannelIndex + 1) % channelSlides.length;
+                updateChannelSlide(currentChannelIndex);
+            }
+        }, 15000); 
+    }
+
+    function pauseAllCarousels() {
+        isPausedByHoverOrTouch = true;
+        if (channelInterval) {
+            clearInterval(channelInterval);
+            channelInterval = null;
+        }
+        if (currentWorkInterval) {
+            clearTimeout(currentWorkInterval);
+            currentWorkInterval = null;
+        }
+    }
+
+    function resumeAllCarousels() {
+        isPausedByHoverOrTouch = false;
+        startChannelAutoplay();
+        scheduleNextWorkSlide(channelSlides[currentChannelIndex]);
+    }
+
+    if (channelSlides.length > 0) {
+        setupWorkCarousels();
+        updateChannelSlide(currentChannelIndex);
+        startChannelAutoplay();
+
+        if (channelsWrapper) {
+            channelsWrapper.addEventListener("mouseenter", pauseAllCarousels);
+            channelsWrapper.addEventListener("mouseleave", resumeAllCarousels);
+        }
+
+        window.addEventListener("pointerdown", pauseAllCarousels);
+        window.addEventListener("pointerup", resumeAllCarousels);
+        window.addEventListener("pointercancel", resumeAllCarousels);
+
+        if (prevChannelBtn && nextChannelBtn) {
+            nextChannelBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                currentChannelIndex = (currentChannelIndex + 1) % channelSlides.length;
+                updateChannelSlide(currentChannelIndex);
+                startChannelAutoplay(); 
+            });
+
+            prevChannelBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                currentChannelIndex = (currentChannelIndex - 1 + channelSlides.length) % channelSlides.length;
+                updateChannelSlide(currentChannelIndex);
+                startChannelAutoplay(); 
+            });
+        }
     }
 });
